@@ -16,7 +16,7 @@ public class BossHP : MonoBehaviour
             bossCurrentHp = bossMaxHp;
         }
     }
-
+    public GameObject portal;
     public bossHpData bossData;
 
     // Start is called before the first frame update
@@ -28,7 +28,10 @@ public class BossHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(bossData.bossCurrentHp <= 0){
+            portal.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 
     public void TakeDamage(float Damage){
