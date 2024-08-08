@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     bool isPlayerInTrigger = false;
+    public string Scenename;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class Portal : MonoBehaviour
     void Update()
     {
         if(isPlayerInTrigger && Input.GetKey(KeyCode.W)){
-            SceneManager.LoadScene("New Scene");
+            SceneManager.LoadScene(Scenename);
         }
     }
 
