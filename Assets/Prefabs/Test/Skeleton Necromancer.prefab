@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1135815429877680996}
   - component: {fileID: 387093933396969622}
   - component: {fileID: 7595465846672297891}
+  - component: {fileID: 8753837713575639286}
   - component: {fileID: 8006829720072615755}
   m_Layer: 13
   m_Name: Skeleton Necromancer
@@ -135,8 +136,43 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.91316223, y: 0.28758126}
-  m_Size: {x: 7.779863, y: 8.453094}
+  m_Offset: {x: -0.1266855, y: -0.5753771}
+  m_Size: {x: 3.800197, y: 6.727177}
+  m_Direction: 0
+--- !u!70 &8753837713575639286
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020091705983700}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1523608, y: -0.5753775}
+  m_Size: {x: 4.056949, y: 6.983929}
   m_Direction: 0
 --- !u!195 &8006829720072615755
 NavMeshAgent:
