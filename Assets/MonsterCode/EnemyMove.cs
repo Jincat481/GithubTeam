@@ -74,6 +74,7 @@ public class EnemyMove : MonoBehaviour
         else
         {
             cl.enabled = false;
+            agent.enabled = false;
             anim.SetTrigger("IsDie");
         }
     }
@@ -89,7 +90,6 @@ public class EnemyMove : MonoBehaviour
             Instantiate(Potion, transform.position, Quaternion.identity);
         }
         Debug.Log("일반몹 사망");
-        anim.SetTrigger("IsDead");
     }
 
     public void HurtEnd()
