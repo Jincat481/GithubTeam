@@ -74,25 +74,13 @@ public class EnemyMove : MonoBehaviour
         else
         {
             cl.enabled = false;
+            agent.enabled = false;
             anim.SetTrigger("IsDie");
         }
     }
 
     // 애니메이션 관련된 코드들
     public void IsDead()
-    {
-        anim.SetTrigger("IsDead");
-    }
-
-    public void HurtEnd()
-    {
-        if (!anim.GetBool("IsIdle"))
-        {
-            anim.SetBool("IsWalk", true);
-        }
-        agent.isStopped = false;
-    }
-    public void destroyObject()
     {
         Destroy(gameObject);
         // HP포션 생성
@@ -102,6 +90,15 @@ public class EnemyMove : MonoBehaviour
             Instantiate(Potion, transform.position, Quaternion.identity);
         }
         Debug.Log("일반몹 사망");
+    }
+
+    public void HurtEnd()
+    {
+        if (!anim.GetBool("IsIdle"))
+        {
+            anim.SetBool("IsWalk", true);
+        }
+        agent.isStopped = false;
     }
 
     IEnumerator StartDelay()
