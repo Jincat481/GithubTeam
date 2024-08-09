@@ -81,6 +81,14 @@ public class EnemyMove : MonoBehaviour
     // 애니메이션 관련된 코드들
     public void IsDead()
     {
+        Destroy(gameObject);
+        // HP포션 생성
+        float RandomNum = Random.Range(0, 101);
+        if (RandomNum <= 5)
+        {
+            Instantiate(Potion, transform.position, Quaternion.identity);
+        }
+        Debug.Log("일반몹 사망");
         anim.SetTrigger("IsDead");
     }
 
@@ -91,17 +99,6 @@ public class EnemyMove : MonoBehaviour
             anim.SetBool("IsWalk", true);
         }
         agent.isStopped = false;
-    }
-    public void destroyObject()
-    {
-        Destroy(gameObject);
-        // HP포션 생성
-        float RandomNum = Random.Range(0, 101);
-        if (RandomNum <= 5)
-        {
-            Instantiate(Potion, transform.position, Quaternion.identity);
-        }
-        Debug.Log("일반몹 사망");
     }
 
     IEnumerator StartDelay()
