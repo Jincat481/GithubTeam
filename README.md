@@ -96,6 +96,12 @@
 * 근거리 몬스터
 
   보스가 있을 경우 돌아서 가게 만듦
+---
+## 2024/08/09
+* 근거리 몬스터
+
+  추적, 대기, 피격, 사망 애니메이션 구현
+---
 # 플레이어 구현 사항
 ## 2024/08/02 현재 프로토타입 버전
   * 공격 관련 버그로 인해 처음부터 다시 구현하는 중
@@ -117,7 +123,7 @@
  
 * [PC 일반공격 예시](https://1drv.ms/p/s!AjVAqgUDPzKVlhuXhrqrm6UY946D) (타겟팅)(임시보류중)
  
-* [2024-08-08 팀플 파일] (https://drive.google.com/file/d/1F5m3buIhUa8frPhTY7O66XNq5T25jXvO/view?usp=drive_link)
+* [2024-08-08 팀플 파일](https://drive.google.com/file/d/1F5m3buIhUa8frPhTY7O66XNq5T25jXvO/view?usp=drive_link)
 ---
 # 팀원
 기획 :
