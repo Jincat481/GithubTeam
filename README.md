@@ -2,6 +2,8 @@
 
 유니티 사용하는 버전은 [2022.3.29f1](https://unity.com/kr/releases/editor/whats-new/2022.3.29#installs)입니다.
 
+추가로 패키지 매니저에서 com.unity.render-pipelines.core 검색하셔서 다운 받으세요.
+
 [스파인 다운로드](https://ko.esotericsoftware.com/spine-unity-download/)
 
 다들 계획에 차질없게 진행하시길 바랍니다.
