@@ -3396,6 +3396,9 @@ MonoBehaviour:
   meleeSpeed: 0
   damage: 1
   attackDelay: 0.7
+  attackDirection: {x: 0, y: 0}
+  canAttack: 1
+  cooldownReduced: 0
 --- !u!50 &750902700
 Rigidbody2D:
   serializedVersion: 4
@@ -3507,7 +3510,7 @@ MonoBehaviour:
   anim: {fileID: 750902698}
   meleeSpeed: 0.7
   damage: 1
-  attackCollider: {fileID: 0}
+  attackCollider: {fileID: 410345677}
 --- !u!114 &750902704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5886,7 +5889,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe1c22d4ed51284db73b5b5c9cfed84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  A: {fileID: 750902696}
+  target: {fileID: 750902702}
+  speed: 3
+  center: {x: 0.03, y: 0}
+  size: {x: 40, y: 28.3}
 --- !u!114 &1645854536
 MonoBehaviour:
   m_ObjectHideFlags: 0
