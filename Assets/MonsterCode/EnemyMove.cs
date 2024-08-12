@@ -65,7 +65,7 @@ public class EnemyMove : MonoBehaviour
         health -= damage;
 
         anim.SetBool("IsWalk", false);
-        agent.isStopped = true;
+        agent.ResetPath();
         rigid.velocity = Vector3.zero;
         if (health > 0f)
         {
@@ -98,7 +98,6 @@ public class EnemyMove : MonoBehaviour
         {
             anim.SetBool("IsWalk", true);
         }
-        agent.isStopped = false;
     }
 
     IEnumerator StartDelay()
