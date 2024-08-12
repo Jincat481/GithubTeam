@@ -74,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   Potion: {fileID: 2024875715454788301, guid: 6890768d5ba9b6a47a2adb85ad522e21, type: 3}
+  CollisionDamage: 5
   anim: {fileID: 0}
   moveSpeed: 3
   spawnDelay: 5
