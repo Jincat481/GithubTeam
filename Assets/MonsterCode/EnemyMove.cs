@@ -11,7 +11,6 @@ public class EnemyMove : MonoBehaviour
     private GameObject Potion;
     [SerializeField]private float CollisionDamage;
     private GameObject Player;
-    [SerializeField]
     private Animator anim;
     public float moveSpeed;
     public float spawnDelay;
@@ -114,6 +113,7 @@ public class EnemyMove : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D o) {
         if(o.gameObject.CompareTag("Player") && !playerScript.isDashing){
             playerScript.TakeDamage(CollisionDamage);
+            agent.ResetPath();
             anim.SetBool("IsIdle", true);
             anim.SetBool("IsWalk", false);
         }
