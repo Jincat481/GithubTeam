@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayOneShot : MonoBehaviour
+public class MsoundManger : MonoBehaviour
 {
-    public AudioClip[] HurtarrAudio;
-    public float hurtVolumeScale;
-    public AudioClip[] DieAudio;
-    public float dieVolumeScale;
+    public AudioClip EnemyHurtAudio;
+    public float EnemyHurtVolumeScale;
+    public AudioClip BossHurtAudio;
+    public float BossHurtVolumeScale;
     // Start is called before the first frame update
     void Start()
     {
