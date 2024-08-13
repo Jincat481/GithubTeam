@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private bool isInvincible = false; // 무적 상태 여부
     private float invincibleDuration = 0.5f; // 무적 지속 시간
 
-    
     private Rigidbody2D MyRigidbody2D;
     private Animator MyAnimator;
 
@@ -31,7 +30,10 @@ public class PlayerController : MonoBehaviour
     public bool canAttack = true; // 공격 가능 여부
     public bool cooldownReduced = false; // 쿨타임 감소 여부
 
-    void Start()
+    // 플레이어 이펙트 관련 변수
+    public PlayerEffects playerEffects; // 플레이어 이펙트 컴포넌트
+
+    private void Start()
     {
         // 초기 체력 설정
         curHp = maxHp;
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
         MyAnimator = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         // 이동 처리 (대쉬 중이 아닐 때만)
         if (!isDashing)
@@ -51,13 +53,11 @@ public class PlayerController : MonoBehaviour
 
         // 대쉬 처리
         HandleDash();
+
         if (currentdashcooldown > 0)
         {
             currentdashcooldown -= Time.deltaTime;
         }
-
-   
-        
     }
 
     // 이동 처리 함수
@@ -99,6 +99,10 @@ public class PlayerController : MonoBehaviour
             }
 
             StartCoroutine(InvincibilityCoroutine());
+
+            // 데미지 사운드 및 이펙트 재생
+            SoundManager.Instance.Play("Damage");
+            playerEffects.PlayDamageEffect();
         }
     }
 
@@ -132,6 +136,10 @@ public class PlayerController : MonoBehaviour
         float elapsedTime = 0;
         float dashDistanceTraveled = 0;
 
+        // 대쉬 사운드 및 이펙트 재생
+        SoundManager.Instance.Play("Dash");
+        playerEffects.PlayDashEffect();
+
         while (elapsedTime < dashTime && dashDistanceTraveled < dashDistance)
         {
             float distanceThisFrame = dashSpeed * Time.deltaTime;
@@ -143,5 +151,81 @@ public class PlayerController : MonoBehaviour
         }
 
         isDashing = false; // 대쉬 상태 해제
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (canAttack && (other.CompareTag("Enemy") || other.CompareTag("Boss")))
+        {
+            ApplyMeleeDamage(other); // 근접 공격 대미지 적용
+        }
+
+        // 대쉬 상태일 때 보스와 충돌 시 대쉬 데미지만 적용
+        if (isDashing && other.CompareTag("Boss"))
+        {
+            ApplyDashDamage(other); // 대쉬 대미지 적용
+        }
+    }
+
+    // 근접 공격 대미지 적용 함수
+    private void ApplyMeleeDamage(Collider2D other)
+    {
+        EnemyMove enemyMove = other.GetComponent<EnemyMove>();
+        if (enemyMove != null)
+        {
+            enemyMove.TakeDamage(damage); // 근접 공격 대미지 적용
+            Debug.Log("근접 공격 성공; 방향: " + attackDirection);
+
+            // 공격 사운드 및 이펙트 재생
+            SoundManager.Instance.Play("Attack");
+            playerEffects.PlayAttackEffect();
+        }
+
+        RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
+        if (rangedMonster != null)
+        {
+            rangedMonster.TakeDamage(damage); // 근접 공격 대미지 적용
+            Debug.Log("근접 공격 성공; 방향: " + attackDirection);
+
+            // 공격 사운드 및 이펙트 재생
+            SoundManager.Instance.Play("Attack");
+            playerEffects.PlayAttackEffect();
+        }
+    }
+
+    // 대쉬 대미지 적용 함수
+    private void ApplyDashDamage(Collider2D other)
+    {
+        if (other.CompareTag("Boss"))
+        {
+            BossHP boss = other.GetComponent<BossHP>();
+            if (boss != null)
+            {
+                boss.TakeDamage(dashDamage); // 대쉬 대미지 적용
+                Debug.Log("대쉬 공격 성공; 방향: " + attackDirection);
+            }
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            EnemyMove enemyMove = other.GetComponent<EnemyMove>();
+            if (enemyMove != null)
+            {
+                enemyMove.TakeDamage(dashDamage); // 대쉬 대미지 적용
+                Debug.Log("대쉬 공격 성공; 방향: " + attackDirection);
+            }
+
+            RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
+            if (rangedMonster != null)
+            {
+                rangedMonster.TakeDamage(dashDamage); // 대쉬 대미지 적용
+                Debug.Log("대쉬 공격 성공; 방향: " + attackDirection);
+            }
+        }
+
+        // 보스에게 대쉬 대미지를 적용해도 쿨타임을 초기화하지 않음
+        if (!other.CompareTag("Boss"))
+        {
+            currentdashcooldown = 0; // 대쉬 쿨타임 초기화
+        }
     }
 }
