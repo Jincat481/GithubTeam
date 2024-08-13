@@ -10,7 +10,7 @@ public class PlayerEffects : MonoBehaviour
 
     private void Start()
     {
-        // 초기 설정이 필요한 경우
+        
     }
 
     // 공격 시 호출되는 메서드

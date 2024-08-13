@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // 이동, 대쉬, 공격 관련 변수
+    // 이동, 대쉬 관련 변수
     public float moveSpeed; // 이동 속도 
     public float dashSpeed; // 대쉬 속도
     public float dashTime; // 대쉬 지속 시간
@@ -22,16 +22,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D MyRigidbody2D;
     private Animator MyAnimator;
 
-    // 근접 공격 관련 변수
-    public float meleeSpeed; // 공격 속도
-    public float damage; // 공격력
-    public float attackDelay; // 공격 딜레이
-    public Vector2 attackDirection; // 공격 방향
-    public bool canAttack = true; // 공격 가능 여부
-    public bool cooldownReduced = false; // 쿨타임 감소 여부
-
-    // 플레이어 이펙트 관련 변수
-    public PlayerEffects playerEffects; // 플레이어 이펙트 컴포넌트
+    // 이펙트 및 사운드 관련 변수
+    public PlayerEffects playerEffects; // 플레이어 이펙트 스크립트
+    public PlayerAttack playerAttack; // 플레이어 어택 스크립트
 
     private void Start()
     {
@@ -41,6 +34,17 @@ public class PlayerController : MonoBehaviour
         // 컴포넌트 초기화
         MyRigidbody2D = GetComponent<Rigidbody2D>();
         MyAnimator = GetComponent<Animator>();
+
+        // 이펙트 및 공격 스크립트 설정
+        if (playerEffects == null)
+        {
+            playerEffects = GetComponent<PlayerEffects>();
+        }
+
+        if (playerAttack == null)
+        {
+            playerAttack = GetComponent<PlayerAttack>();
+        }
     }
 
     private void FixedUpdate()
@@ -54,6 +58,7 @@ public class PlayerController : MonoBehaviour
         // 대쉬 처리
         HandleDash();
 
+        // 쿨타임 감소
         if (currentdashcooldown > 0)
         {
             currentdashcooldown -= Time.deltaTime;
@@ -100,9 +105,14 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(InvincibilityCoroutine());
 
-            // 데미지 사운드 및 이펙트 재생
+            // 데미지 사운드 재생
             SoundManager.Instance.Play("Damage");
-            playerEffects.PlayDamageEffect();
+
+            // 데미지 이펙트 재생
+            if (playerEffects != null)
+            {
+                playerEffects.PlayDamageEffect();
+            }
         }
     }
 
@@ -136,9 +146,14 @@ public class PlayerController : MonoBehaviour
         float elapsedTime = 0;
         float dashDistanceTraveled = 0;
 
-        // 대쉬 사운드 및 이펙트 재생
+        // 대쉬 사운드 재생
         SoundManager.Instance.Play("Dash");
-        playerEffects.PlayDashEffect();
+
+        // 대쉬 이펙트 재생
+        if (playerEffects != null)
+        {
+            playerEffects.PlayDashEffect();
+        }
 
         while (elapsedTime < dashTime && dashDistanceTraveled < dashDistance)
         {
@@ -153,43 +168,21 @@ public class PlayerController : MonoBehaviour
         isDashing = false; // 대쉬 상태 해제
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (canAttack && (other.CompareTag("Enemy") || other.CompareTag("Boss")))
+        // 공격 입력 처리
+        if (Input.GetMouseButtonDown(0) && playerAttack != null)
         {
-            ApplyMeleeDamage(other); // 근접 공격 대미지 적용
-        }
-
-        // 대쉬 상태일 때 보스와 충돌 시 대쉬 데미지만 적용
-        if (isDashing && other.CompareTag("Boss"))
-        {
-            ApplyDashDamage(other); // 대쉬 대미지 적용
+            playerAttack.PerformAttack(); // 근접 공격 호출
         }
     }
 
-    // 근접 공격 대미지 적용 함수
-    private void ApplyMeleeDamage(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        EnemyMove enemyMove = other.GetComponent<EnemyMove>();
-        if (enemyMove != null)
+        // 대쉬 상태일 때 보스와 충돌 시 대쉬 대미지만 적용
+        if (isDashing && other.CompareTag("Boss"))
         {
-            enemyMove.TakeDamage(damage); // 근접 공격 대미지 적용
-            Debug.Log("근접 공격 성공; 방향: " + attackDirection);
-
-            // 공격 사운드 및 이펙트 재생
-            SoundManager.Instance.Play("Attack");
-            playerEffects.PlayAttackEffect();
-        }
-
-        RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
-        if (rangedMonster != null)
-        {
-            rangedMonster.TakeDamage(damage); // 근접 공격 대미지 적용
-            Debug.Log("근접 공격 성공; 방향: " + attackDirection);
-
-            // 공격 사운드 및 이펙트 재생
-            SoundManager.Instance.Play("Attack");
-            playerEffects.PlayAttackEffect();
+            ApplyDashDamage(other); // 대쉬 대미지 적용
         }
     }
 
@@ -202,7 +195,7 @@ public class PlayerController : MonoBehaviour
             if (boss != null)
             {
                 boss.TakeDamage(dashDamage); // 대쉬 대미지 적용
-                Debug.Log("대쉬 공격 성공; 방향: " + attackDirection);
+                Debug.Log("대쉬 공격 성공");
             }
         }
         else if (other.CompareTag("Enemy"))
@@ -211,14 +204,14 @@ public class PlayerController : MonoBehaviour
             if (enemyMove != null)
             {
                 enemyMove.TakeDamage(dashDamage); // 대쉬 대미지 적용
-                Debug.Log("대쉬 공격 성공; 방향: " + attackDirection);
+                Debug.Log("대쉬 공격 성공");
             }
 
             RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
             if (rangedMonster != null)
             {
                 rangedMonster.TakeDamage(dashDamage); // 대쉬 대미지 적용
-                Debug.Log("대쉬 공격 성공; 방향: " + attackDirection);
+                Debug.Log("대쉬 공격 성공");
             }
         }
 
