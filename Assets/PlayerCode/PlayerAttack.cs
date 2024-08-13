@@ -1,25 +1,27 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private Animator anim; // ¾Ö´Ï¸ÞÀÌÅÍ ÄÄÆ÷³ÍÆ®
-    [SerializeField] private float meleeSpeed = 0.5f; // °ø°Ý ¼Óµµ
-    [SerializeField] private float damage = 1f; // °ø°Ý µ¥¹ÌÁö
-    [SerializeField] private Collider2D attackCollider; // °ø°Ý ÄÝ¶óÀÌ´õ (Is Trigger·Î ¼³Á¤)
-    [SerializeField] private PlayerController playerController; // PlayerController ÂüÁ¶
+    [SerializeField] private Animator anim; // ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    [SerializeField] private float meleeSpeed; // ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
+    [SerializeField] private float damage = 1f; // ï¿½ï¿½ï¿½Ý·ï¿½
+    [SerializeField] private Collider2D attackCollider; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½
 
-    private float timeUntilMelee; // °ø°Ý ÄðÅ¸ÀÓ
+    private float timeUntilMelee; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½
+    private Vector2 attackDirection; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private bool attackProcessed; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½
 
     private void Update()
     {
-        // ¸¶¿ì½º ÁÂÅ¬¸¯ ÀÔ·ÂÀ» °¨ÁöÇÏ¿© °ø°Ý ¼öÇà
-        if (Input.GetMouseButtonDown(0)) // 0Àº ÁÂÅ¬¸¯À» ÀÇ¹ÌÇÔ
+        // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Å¬ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if (Input.GetMouseButtonDown(0)) // 0ï¿½ï¿½ ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½ï¿½
         {
             PerformAttack();
         }
 
-        // °ø°Ý ÄðÅ¸ÀÓ °¨¼Ò
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (timeUntilMelee > 0f)
         {
             timeUntilMelee -= Time.deltaTime;
@@ -30,86 +32,70 @@ public class PlayerAttack : MonoBehaviour
     {
         if (timeUntilMelee <= 0f)
         {
-            // °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç Æ®¸®°Å È£Ãâ
-            anim.SetTrigger("Attack");
+            // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            if (Input.GetMouseButtonDown(0))
+            {
+                // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                attackDirection = (mousePosition - (Vector2)transform.position).normalized;
 
-            // °ø°Ý Ã³¸® ÄÚ·çÆ¾ È£Ãâ
-            StartCoroutine(AttackCoroutine());
-
-            // ÄðÅ¸ÀÓ ÃÊ±âÈ­
-            timeUntilMelee = meleeSpeed;
+                anim.SetTrigger("Attack"); // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½
+                timeUntilMelee = meleeSpeed; // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ê±ï¿½È­
+                attackProcessed = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
+            }
+        }
+        else
+        {
+            timeUntilMelee -= Time.deltaTime; // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
     }
 
-    private IEnumerator AttackCoroutine()
+    // ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+    private void ApplyDamage()
     {
-        // °ø°Ý ¾Ö´Ï¸ÞÀÌ¼ÇÀÇ ±æÀÌ¿¡ µû¶ó ´ë±â
-        float attackAnimationLength = anim.GetCurrentAnimatorStateInfo(0).length;
-
-        // °ø°Ý ÄÝ¶óÀÌ´õ È°¼ºÈ­
-        attackCollider.enabled = true;
-
-        // ¾Ö´Ï¸ÞÀÌ¼Ç ±æÀÌ µ¿¾È ´ë±â
-        yield return new WaitForSeconds(attackAnimationLength);
-
-        // °ø°Ý ÄÝ¶óÀÌ´õ ºñÈ°¼ºÈ­
-        attackCollider.enabled = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        // Æ®¸®°ÅµÈ ¿ÀºêÁ§Æ®°¡ ÀûÀÎ °æ¿ì µ¥¹ÌÁö Àû¿ë
-        bool damageApplied = false; // µ¥¹ÌÁö Àû¿ë ¿©ºÎ¸¦ È®ÀÎÇÏ±â À§ÇÑ º¯¼ö
-
-        if (other.CompareTag("Enemy"))
+        if (attackProcessed)
         {
-            EnemyMove enemyMove = other.GetComponent<EnemyMove>();
-            if (enemyMove != null)
-            {
-                enemyMove.TakeDamage(damage); // µ¥¹ÌÁö Àû¿ë
-                Debug.Log("Àû¿¡°Ô °ø°Ý ¼º°ø");
-                damageApplied = true;
-            }
-
-            RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
-            if (rangedMonster != null)
-            {
-                rangedMonster.TakeDamage(damage); // µ¥¹ÌÁö Àû¿ë
-                Debug.Log("¿ø°Å¸® ¸ó½ºÅÍ¿¡°Ô °ø°Ý ¼º°ø");
-                damageApplied = true;
-            }
+            return; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         }
-        else if (other.CompareTag("Boss"))
+
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackCollider.bounds.center, attackCollider.bounds.size, 0f);
+
+        foreach (Collider2D hitCollider in hitColliders)
         {
-            BossHP boss = other.GetComponent<BossHP>();
-            if (boss != null)
+            if (hitCollider.CompareTag("Enemy"))
             {
-                boss.TakeDamage(damage); // µ¥¹ÌÁö Àû¿ë
-                Debug.Log("º¸½º¿¡°Ô °ø°Ý ¼º°ø");
-                damageApplied = true;
+                EnemyMove enemyMove = hitCollider.GetComponent<EnemyMove>();
+                if (enemyMove != null)
+                {
+                    enemyMove.TakeDamage(damage);
+                    Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½; ï¿½ï¿½ï¿½ï¿½: " + attackDirection);
+                }
+
+                RangedMonster rangerMonster = hitCollider.GetComponent<RangedMonster>();
+                if (rangerMonster != null)
+                {
+                    rangerMonster.TakeDamage(damage);
+                    Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½; ï¿½ï¿½ï¿½ï¿½: " + attackDirection);
+                }
+            }
+            else if (hitCollider.CompareTag("Boss"))
+            {
+                BossHP boss = hitCollider.GetComponent<BossHP>();
+                if (boss != null)
+                {
+                    boss.TakeDamage(damage);
+                    Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½; ï¿½ï¿½ï¿½ï¿½: " + attackDirection);
+                }
             }
         }
 
-        // µ¥¹ÌÁö°¡ Àû¿ëµÇ¾úÀ» °æ¿ì ´ë½¬ ÄðÅ¸ÀÓ °¨¼Ò
-        if (damageApplied)
-        {
-            ReduceDashCooldown();
-        }
-    }
-
-    private void ReduceDashCooldown()
-    {
-        // ÇöÀç ´ë½¬ ÄðÅ¸ÀÓ¿¡¼­ 1ÃÊ¸¦ °¨¼Ò½ÃÅ´
-        if (playerController != null && playerController.currentdashcooldown > 0)
-        {
-            playerController.currentdashcooldown -= 1f;
-            Debug.Log("´ë½¬ ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò");
-        }
+        attackProcessed = true; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
     }
 
     private void OnDrawGizmos()
     {
-        // µð¹ö±×¿ë °ø°Ý ÄÝ¶óÀÌ´õ ½Ã°¢È­
+        // ï¿½ï¿½ï¿½ï¿½×¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½Ã°ï¿½È­
         if (attackCollider != null)
         {
             Gizmos.color = Color.red;
