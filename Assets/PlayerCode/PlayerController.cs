@@ -15,23 +15,21 @@ public class PlayerController : MonoBehaviour
 
     // 체력 및 무적 상태 관련 변수
     public float maxHp = 100;
-    [ReadOnly]
     public float curHp = 100;
     private bool isInvincible = false; // 무적 상태 여부
     private float invincibleDuration = 0.5f; // 무적 지속 시간
 
-    // 컴포넌트 참조 변수
+    
     private Rigidbody2D MyRigidbody2D;
     private Animator MyAnimator;
 
     // 근접 공격 관련 변수
-    [SerializeField] private float meleeSpeed; // 공격 속도
-    [SerializeField] private float damage; // 공격력
-    [SerializeField] private float attackDelay; // 공격 딜레이
-    private float timeUntimelee; // 공격 쿨타임
-    private Vector2 attackDirection; // 공격 방향
-    private bool canAttack = true; // 공격 가능 여부
-    private bool cooldownReduced = false; // 쿨타임 감소 여부
+    public float meleeSpeed; // 공격 속도
+    public float damage; // 공격력
+    public float attackDelay; // 공격 딜레이
+    public Vector2 attackDirection; // 공격 방향
+    public bool canAttack = true; // 공격 가능 여부
+    public bool cooldownReduced = false; // 쿨타임 감소 여부
 
     void Start()
     {
@@ -58,8 +56,8 @@ public class PlayerController : MonoBehaviour
             currentdashcooldown -= Time.deltaTime;
         }
 
-        // 공격 처리
-        HandleAttack();
+   
+        
     }
 
     // 이동 처리 함수
@@ -146,131 +144,4 @@ public class PlayerController : MonoBehaviour
 
         isDashing = false; // 대쉬 상태 해제
     }
-
-    // 충돌 처리 함수
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (isDashing)
-        {
-            ApplyDashDamage(collision.collider);
-        }
-    }
-
-    private void ApplyDashDamage(Collider2D collider)
-    {
-        EnemyMove enemyMove = collider.GetComponent<EnemyMove>();
-        if (enemyMove != null)
-        {
-            enemyMove.TakeDamage(dashDamage); // 대쉬 데미지 적용
-        }
-
-        BossHP boss = collider.GetComponent<BossHP>();
-        if (boss != null)
-        {
-            boss.TakeDamage(dashDamage); // 보스에게 대쉬 데미지 적용
-        }
-
-        RangedMonster rangedMonster = collider.GetComponent<RangedMonster>();
-        if (rangedMonster != null)
-        {
-            rangedMonster.TakeDamage(dashDamage); // RangedMonster에게 대쉬 데미지 적용
-        }
-    }
-
-
-
-    // 공격 처리 함수
-    private void HandleAttack()
-    {
-        if (timeUntimelee <= 0f && canAttack)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                attackDirection = (mousePosition - (Vector2)transform.position).normalized;
-
-                // 공격 애니메이션 실행
-                MyAnimator.SetTrigger("Attack");
-
-                // 공격 딜레이 시작
-                StartCoroutine(AttackDelayCoroutine());
-
-                timeUntimelee = meleeSpeed; // 쿨타임 초기화
-                cooldownReduced = false; // 쿨다운 감소 플래그 초기화
-            }
-        }
-        else
-        {
-            timeUntimelee -= Time.deltaTime; // 쿨타임 감소
-        }
-    }
-
-    // 공격 딜레이 코루틴
-    private IEnumerator AttackDelayCoroutine()
-    {
-        canAttack = false; // 공격 불가능 상태로 설정
-        yield return new WaitForSeconds(attackDelay); // 공격 딜레이 대기
-        canAttack = true; // 공격 가능 상태로 설정
-    }
-
-    // 트리거 충돌 처리 함수
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            HandleEnemyCollision(other);
-        }
-        else if (other.CompareTag("Boss")) // 보스 태그 확인
-        {
-            HandleBossCollision(other);
-        }
-    }
-
-    private void HandleEnemyCollision(Collider2D other)
-    {
-        EnemyMove enemyMove = other.GetComponent<EnemyMove>();
-        if (enemyMove != null)
-        {
-            enemyMove.TakeDamage(damage); // 적에게 데미지를 줍니다.
-            Debug.Log("공격 성공; 방향: " + attackDirection); // 공격 성공 메시지와 방향 출력
-
-            ReduceDashCooldown(); // 대쉬 쿨타임 감소
-        }
-
-        RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
-        if (rangedMonster != null)
-        {
-            rangedMonster.TakeDamage(damage); // 적에게 데미지를 줍니다.
-            Debug.Log("공격 성공; 방향: " + attackDirection); // 공격 성공 메시지와 방향 출력
-
-            ReduceDashCooldown(); // 대쉬 쿨타임 감소
-        }
-    }
-
-    private void HandleBossCollision(Collider2D other)
-    {
-        BossHP boss = other.GetComponent<BossHP>();
-        if (boss != null)
-        {
-            boss.TakeDamage(damage); // 보스에게 데미지를 줍니다.
-            Debug.Log("보스 공격 성공; 방향: " + attackDirection); // 보스 공격 성공 메시지와 방향 출력
-
-            ReduceDashCooldown(); // 대쉬 쿨타임 감소
-        }
-    }
-
-    private void ReduceDashCooldown()
-    {
-        if (!cooldownReduced)
-        {
-            currentdashcooldown -= 1f;
-            if (currentdashcooldown < 0)
-            {
-                currentdashcooldown = 0;
-            }
-            cooldownReduced = true; // 쿨다운 감소가 한 번만 일어나도록 설정
-        }
-    }
-
 }
-
