@@ -7563,9 +7563,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1940133076}
-  m_Father: {fileID: 455761573}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &979219252
 GameObject:
@@ -7761,6 +7760,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 355913552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044364250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6519945775623626860, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+  m_PrefabInstance: {fileID: 1861301697475300178}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449686fe93066fe4fa82789d3a06ec1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1049106599
 GameObject:
   m_ObjectHideFlags: 0
@@ -9075,8 +9085,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299434983}
-  - component: {fileID: 1299434982}
   - component: {fileID: 1299434981}
+  - component: {fileID: 1299434984}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -9180,23 +9190,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1299434982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1299434980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a9f78601186a944c8639e2a904e589a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundSource: {fileID: 1299434981}
-  attackSound: {fileID: 8300000, guid: 6b7eaf4532a2f614595ad58d2b86efc4, type: 3}
-  dashSound: {fileID: 8300000, guid: 0bddcb411d826e14bb26d40ae45d8e22, type: 3}
-  damageSound: {fileID: 8300000, guid: 64795b87003c2324fa0814fbc336066c, type: 3}
-  deathSound: {fileID: 0}
 --- !u!4 &1299434983
 Transform:
   m_ObjectHideFlags: 0
@@ -9212,6 +9205,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299434984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299434980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce0e7631a915bc244b874dd7529f1ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundSource: {fileID: 1299434981}
+  attackSound: {fileID: 0}
+  dashSound: {fileID: 8300000, guid: 64795b87003c2324fa0814fbc336066c, type: 3}
+  damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!1 &1346483962
 GameObject:
   m_ObjectHideFlags: 0
@@ -10693,12 +10703,36 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6019107535184151787, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6519945775623626860, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: playerAttack
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168348360548301442, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605275752201210973, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: meleeSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8605275752201210973, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
       propertyPath: attackCollider
       value: 
       objectReference: {fileID: 158519227}
+    - target: {fileID: 8605275752201210973, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1044364250}
     - target: {fileID: 8853074599835122114, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9199561381399952822, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10726,3 +10760,5 @@ SceneRoots:
   - {fileID: 1181837683}
   - {fileID: 408205931}
   - {fileID: 916216843}
+  - {fileID: 976452248}
+  - {fileID: 1299434983}

@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private bool isInvincible = false; // 무적 상태 여부
     private float invincibleDuration = 0.5f; // 무적 지속 시간
 
-    
     private Rigidbody2D MyRigidbody2D;
     private Animator MyAnimator;
 
@@ -48,7 +47,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         // 이동 처리 (대쉬 중이 아닐 때만)
         if (!isDashing)
@@ -64,9 +63,6 @@ public class PlayerController : MonoBehaviour
         {
             currentdashcooldown -= Time.deltaTime;
         }
-
-   
-        
     }
 
     // 이동 처리 함수
