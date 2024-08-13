@@ -14,10 +14,16 @@ public class EnemyMove : MonoBehaviour
     private Animator anim;
     public float moveSpeed;
     public float spawnDelay;
+
     Rigidbody2D rigid;
     NavMeshAgent agent;
     Collider2D cl;
     PlayerController playerScript;
+    AudioSource audioSource;
+    AudioClip[] hurtAudioClip;
+    PlayOneShot playOneShot;
+    AudioClip[] dieAudioClip;
+    bool ishurt = false;
     public void Start()
     {
         Player = GameObject.FindWithTag("Player");
@@ -26,6 +32,11 @@ public class EnemyMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         anim.SetBool("IsIdle", true);
+        playOneShot = GetComponent<PlayOneShot>();
+        audioSource = GetComponent<AudioSource>();
+        hurtAudioClip = playOneShot.HurtarrAudio;
+        dieAudioClip = playOneShot.DieAudio;
+
         cl = GetComponent<Collider2D>();
 
         agent = GetComponent<NavMeshAgent>();
@@ -57,7 +68,7 @@ public class EnemyMove : MonoBehaviour
         {
             rigid.velocity = Vector2.zero;
         }
-        else if (anim.GetBool("IsWalk"))
+        else if (anim.GetBool("IsWalk") && health > 0)
         {
             agent.SetDestination(Player.transform.position);
         }
@@ -71,6 +82,10 @@ public class EnemyMove : MonoBehaviour
         rigid.velocity = Vector3.zero;
         if (health > 0f)
         {
+            int sel = Random.Range(0, hurtAudioClip.Length);
+            audioSource.Stop();
+            audioSource.PlayOneShot(hurtAudioClip[sel], playOneShot.hurtVolumeScale);
+
             anim.SetTrigger("IsHurt");
         }
         else
@@ -84,7 +99,12 @@ public class EnemyMove : MonoBehaviour
     // 애니메이션 관련된 코드들
     public void IsDead()
     {
-        Destroy(gameObject);
+        int sel = Random.Range(0, dieAudioClip.Length);
+        AudioClip selectedClip = dieAudioClip[sel];
+        audioSource.Stop();
+        audioSource.PlayOneShot(selectedClip, playOneShot.dieVolumeScale);
+        
+        Destroy(gameObject, selectedClip.length);
         // HP포션 생성
         float RandomNum = Random.Range(0, 101);
         if (RandomNum <= 5)
@@ -94,10 +114,16 @@ public class EnemyMove : MonoBehaviour
         Debug.Log("일반몹 사망");
     }
 
+    public void isHurt()
+    {
+        ishurt = true;
+    }
+
     public void HurtEnd()
     {
         if (!anim.GetBool("IsIdle"))
         {
+            ishurt = false;
             anim.SetBool("IsWalk", true);
         }
     }
@@ -120,7 +146,7 @@ public class EnemyMove : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D o) {
-        if(o.gameObject.CompareTag("Player") && spawnDelay <= 0){
+        if(o.gameObject.CompareTag("Player") && spawnDelay <= 0 && !ishurt){
             anim.SetBool("IsIdle", false);
             anim.SetBool("IsWalk", true);
         }
