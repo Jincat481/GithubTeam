@@ -1,86 +1,115 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private Animator anim; // ¾Ö´Ï¸ŞÀÌÅÍ ÄÄÆ÷³ÍÆ®
-    [SerializeField] private float meleeSpeed; // °ø°İ ¼Óµµ
-    [SerializeField] private float damage = 1f; // °ø°İ·Â
-    [SerializeField] private Collider2D attackCollider; // °ø°İ ¹üÀ§ ´ã´ç Äİ¶óÀÌ´õ
+    [SerializeField] private Animator anim; // ì• ë‹ˆë©”ì´í„° ì»´í¬ë„ŒíŠ¸
+    [SerializeField] private float meleeSpeed = 0.5f; // ê³µê²© ì†ë„
+    [SerializeField] private float damage = 1f; // ê³µê²© ë°ë¯¸ì§€
+    [SerializeField] private Collider2D attackCollider; // ê³µê²© ì½œë¼ì´ë” (Is Triggerë¡œ ì„¤ì •)
+    [SerializeField] private PlayerController playerController; // PlayerController ì°¸ì¡°
 
-    private float timeUntilMelee; // °ø°İ ÄğÅ¸ÀÓ
-    private Vector2 attackDirection; // °ø°İ ¹æÇâ
-    private bool attackProcessed; // °ø°İÀÌ Ã³¸®µÇ¾ú´ÂÁö ¿©ºÎ¸¦ ³ªÅ¸³»´Â ÇÃ·¡±×
+    private float timeUntilMelee; // ê³µê²© ì¿¨íƒ€ì„
 
     private void Update()
     {
-        // ÄğÅ¸ÀÓÀÌ ´Ù µÇ¾ú´Ù¸é °ø°İ °¡´É
-        if (timeUntilMelee <= 0f)
+        // ë§ˆìš°ìŠ¤ ì¢Œí´ë¦­ ì…ë ¥ì„ ê°ì§€í•˜ì—¬ ê³µê²© ìˆ˜í–‰
+        if (Input.GetMouseButtonDown(0)) // 0ì€ ì¢Œí´ë¦­ì„ ì˜ë¯¸í•¨
         {
-            // ¸¶¿ì½º ÁÂÅ¬¸¯ ½Ã °ø°İ
-            if (Input.GetMouseButtonDown(0))
-            {
-                // ¸¶¿ì½º À§Ä¡¿¡ µû¶ó °ø°İ ¹æÇâ ¼³Á¤
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                attackDirection = (mousePosition - (Vector2)transform.position).normalized;
-
-                anim.SetTrigger("Attack"); // ¾Ö´Ï¸ŞÀÌ¼Ç Æ®¸®°Å È£Ãâ
-                timeUntilMelee = meleeSpeed; // ÄğÅ¸ÀÓ ÃÊ±âÈ­
-                attackProcessed = false; // °ø°İÀÌ Ã³¸®µÇÁö ¾Ê¾ÒÀ½À» Ç¥½Ã
-            }
+            PerformAttack();
         }
-        else
+
+        // ê³µê²© ì¿¨íƒ€ì„ ê°ì†Œ
+        if (timeUntilMelee > 0f)
         {
-            timeUntilMelee -= Time.deltaTime; // ÄğÅ¸ÀÓ °¨¼Ò
+            timeUntilMelee -= Time.deltaTime;
         }
     }
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç ÀÌº¥Æ®¿¡¼­ È£ÃâÇÒ ¸Ş¼­µå
-    private void ApplyDamage()
+    public void PerformAttack()
     {
-        if (attackProcessed)
+        if (timeUntilMelee <= 0f)
         {
-            return; // °ø°İÀÌ ÀÌ¹Ì Ã³¸®µÈ °æ¿ì ´õ ÀÌ»ó ÁøÇàÇÏÁö ¾ÊÀ½
+            // ê³µê²© ì• ë‹ˆë©”ì´ì…˜ íŠ¸ë¦¬ê±° í˜¸ì¶œ
+            anim.SetTrigger("Attack");
+
+            // ê³µê²© ì²˜ë¦¬ ì½”ë£¨í‹´ í˜¸ì¶œ
+            StartCoroutine(AttackCoroutine());
+
+            // ì¿¨íƒ€ì„ ì´ˆê¸°í™”
+            timeUntilMelee = meleeSpeed;
+        }
+    }
+
+    private IEnumerator AttackCoroutine()
+    {
+        // ê³µê²© ì• ë‹ˆë©”ì´ì…˜ì˜ ê¸¸ì´ì— ë”°ë¼ ëŒ€ê¸°
+        float attackAnimationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+
+        // ê³µê²© ì½œë¼ì´ë” í™œì„±í™”
+        attackCollider.enabled = true;
+
+        // ì• ë‹ˆë©”ì´ì…˜ ê¸¸ì´ ë™ì•ˆ ëŒ€ê¸°
+        yield return new WaitForSeconds(attackAnimationLength);
+
+        // ê³µê²© ì½œë¼ì´ë” ë¹„í™œì„±í™”
+        attackCollider.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // íŠ¸ë¦¬ê±°ëœ ì˜¤ë¸Œì íŠ¸ê°€ ì ì¸ ê²½ìš° ë°ë¯¸ì§€ ì ìš©
+        bool damageApplied = false; // ë°ë¯¸ì§€ ì ìš© ì—¬ë¶€ë¥¼ í™•ì¸í•˜ê¸° ìœ„í•œ ë³€ìˆ˜
+
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyMove enemyMove = other.GetComponent<EnemyMove>();
+            if (enemyMove != null)
+            {
+                enemyMove.TakeDamage(damage); // ë°ë¯¸ì§€ ì ìš©
+                Debug.Log("ì ì—ê²Œ ê³µê²© ì„±ê³µ");
+                damageApplied = true;
+            }
+
+            RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
+            if (rangedMonster != null)
+            {
+                rangedMonster.TakeDamage(damage); // ë°ë¯¸ì§€ ì ìš©
+                Debug.Log("ì›ê±°ë¦¬ ëª¬ìŠ¤í„°ì—ê²Œ ê³µê²© ì„±ê³µ");
+                damageApplied = true;
+            }
+        }
+        else if (other.CompareTag("Boss"))
+        {
+            BossHP boss = other.GetComponent<BossHP>();
+            if (boss != null)
+            {
+                boss.TakeDamage(damage); // ë°ë¯¸ì§€ ì ìš©
+                Debug.Log("ë³´ìŠ¤ì—ê²Œ ê³µê²© ì„±ê³µ");
+                damageApplied = true;
+            }
         }
 
-        // °ø°İ ¹üÀ§ ³»ÀÇ ¸ğµç Äİ¶óÀÌ´õ¸¦ °¡Á®¿È
-        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackCollider.bounds.center, attackCollider.bounds.size, 0f);
-
-        foreach (Collider2D hitCollider in hitColliders)
+        // ë°ë¯¸ì§€ê°€ ì ìš©ë˜ì—ˆì„ ê²½ìš° ëŒ€ì‰¬ ì¿¨íƒ€ì„ ê°ì†Œ
+        if (damageApplied)
         {
-            if (hitCollider.CompareTag("Enemy"))
-            {
-                EnemyMove enemyMove = hitCollider.GetComponent<EnemyMove>();
-                if (enemyMove != null)
-                {
-                    enemyMove.TakeDamage(damage);
-                    Debug.Log("°ø°İ ¼º°ø; ¹æÇâ: " + attackDirection);
-                }
-
-                RangedMonster rangerMonster = hitCollider.GetComponent<RangedMonster>();
-                if (rangerMonster != null)
-                {
-                    rangerMonster.TakeDamage(damage);
-                    Debug.Log("°ø°İ ¼º°ø; ¹æÇâ: " + attackDirection);
-                }
-            }
-            else if (hitCollider.CompareTag("Boss"))
-            {
-                BossHP boss = hitCollider.GetComponent<BossHP>();
-                if (boss != null)
-                {
-                    boss.TakeDamage(damage);
-                    Debug.Log("°ø°İ ¼º°ø; ¹æÇâ: " + attackDirection);
-                }
-            }
+            ReduceDashCooldown();
         }
+    }
 
-        attackProcessed = true; // °ø°İÀÌ Ã³¸®µÇ¾úÀ½À» Ç¥½Ã
+    private void ReduceDashCooldown()
+    {
+        // í˜„ì¬ ëŒ€ì‰¬ ì¿¨íƒ€ì„ì—ì„œ 1ì´ˆë¥¼ ê°ì†Œì‹œí‚´
+        if (playerController != null && playerController.currentdashcooldown > 0)
+        {
+            playerController.currentdashcooldown -= 1f;
+            Debug.Log("ëŒ€ì‰¬ ì¿¨íƒ€ì„ 1ì´ˆ ê°ì†Œ");
+        }
     }
 
     private void OnDrawGizmos()
     {
+        // ë””ë²„ê·¸ìš© ê³µê²© ì½œë¼ì´ë” ì‹œê°í™”
         if (attackCollider != null)
         {
             Gizmos.color = Color.red;
