@@ -83,11 +83,27 @@ public class PlayerController : MonoBehaviour
         // 이동 애니메이션 처리
         if (movement != Vector2.zero)
         {
-            MyAnimator.SetBool("Walk", true);
+            if (moveHorizontal < 0) // 왼쪽 이동
+            {
+                MyAnimator.SetBool("IsWalkingLeft", true);
+                MyAnimator.SetBool("IsWalkingRight", false);
+            }
+            else if (moveHorizontal > 0) // 오른쪽 이동
+            {
+                MyAnimator.SetBool("IsWalkingLeft", false);
+                MyAnimator.SetBool("IsWalkingRight", true);
+            }
+            else // 상하 이동만 있을 때
+            {
+                MyAnimator.SetBool("IsWalkingLeft", false);
+                MyAnimator.SetBool("IsWalkingRight", false);
+            }
         }
         else
         {
-            MyAnimator.SetBool("Walk", false);
+            // 이동하지 않을 때는 모든 걷기 애니메이션을 false로 설정
+            MyAnimator.SetBool("IsWalkingLeft", false);
+            MyAnimator.SetBool("IsWalkingRight", false);
         }
     }
 
@@ -138,6 +154,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true; // 대쉬 상태로 설정
+        MyAnimator.SetBool("IsDashing", true); // 대쉬 애니메이션 트리거
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 dashDirection = (mousePosition - (Vector2)transform.position).normalized;
@@ -166,6 +183,7 @@ public class PlayerController : MonoBehaviour
         }
 
         isDashing = false; // 대쉬 상태 해제
+        MyAnimator.SetBool("IsDashing", false); // 대쉬 애니메이션 종료
     }
 
     private void Update()
@@ -174,6 +192,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && playerAttack != null)
         {
             playerAttack.PerformAttack(); // 근접 공격 호출
+            MyAnimator.SetTrigger("Attack"); // 공격 애니메이션 트리거
         }
     }
 
