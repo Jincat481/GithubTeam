@@ -147,6 +147,7 @@
 
 ---
 # 그래픽
+## 김성철
 ## 맵
 ## ~2024/08/15
 ![배경-1sss](https://github.com/user-attachments/assets/01105d8a-0e44-4e3b-9a1f-a2df45890d3d)
@@ -168,6 +169,18 @@
 ## ~2024/08/15
 ![보스-1](https://github.com/user-attachments/assets/63383ae9-30ff-4f81-9a38-6ec1137850e3)
 ![음악가](https://github.com/user-attachments/assets/1cc3fbc3-b92b-42bb-a692-a117012f4a2a)
+
+
+-------------------------------------------------
+
+# BOSS 디폼 채색
+## ~2024/08/15
+![다크판타지](https://github.com/user-attachments/assets/5103c1c4-41c3-4a25-8143-d9b0ce83cf0a)
+![돼지](https://github.com/user-attachments/assets/c622e818-a70a-4801-8be0-99a03f994aff)
+![뱀파이어](https://github.com/user-attachments/assets/1be5a7da-bb86-456f-b484-b48fedaa7333)
+![파라오](https://github.com/user-attachments/assets/028680d4-72ee-4429-a315-62fa27fd2972)
+![파리 스케치완2](https://github.com/user-attachments/assets/6de4![파리 스케치완](https://github.com/user-attachments/assets/57e80f70-cc7d-4eaf-bcb0-dbbef6d7731a)
+8799-12db-4290-bae1-7b88d9a7a852)
 
 ---
 
