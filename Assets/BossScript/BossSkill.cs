@@ -87,13 +87,7 @@ public class BossSkill : MonoBehaviour
         InitializeSkillDataDictionary();
         Player = GameObject.FindWithTag("Player");
         skill4Script = GetComponentInChildren<Skill4>();
-        skill4Script.SkillretentionTime = skill4Data.SkillretentionTime;
-        skill4Script.Damage = skill4Data.Damage;
-        skill4Script.animatorSpeed = skill4Data.ObjectSpeed;
         skill5Script = GetComponentInChildren<Skill5>();
-        skill5Script.SkillretentionTime = skill5Data.SkillretentionTime;
-        skill5Script.Damage = skill5Data.Damage;
-        skill5Script.animationSpeed = skill5Data.ObjectSpeed;
     }
 
     void Update()
@@ -309,6 +303,7 @@ public class BossSkill : MonoBehaviour
         directiontoPlayer();
         skill4Script.animatorSpeed = skill4.ObjectSpeed;
         skill4Script.SkillretentionTime = skill4.SkillretentionTime;
+        skill4Script.Damage = skill4.Damage;
         skill4Script.direction = directiontoplayer;
         skill4Script.Skill4Start();
         yield return new WaitUntil(() => skill4.Skill4End); // 스킬이 끝날 때 까지 기다림
@@ -320,6 +315,7 @@ public class BossSkill : MonoBehaviour
         skill5.Skill5End = false;
         skill5Script.animationSpeed = skill5.ObjectSpeed;
         skill5Script.SkillretentionTime = skill5.SkillretentionTime;
+        skill5Script.Damage = skill5.Damage;
         skill5Script.Skill5Start();
         yield return new WaitUntil(() => skill5.Skill5End);
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill5));
