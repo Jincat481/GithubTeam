@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7595465846672297891}
   - component: {fileID: 8753837713575639286}
   - component: {fileID: 8006829720072615755}
-  - component: {fileID: 7152196743466230059}
   - component: {fileID: -7744195317057086508}
   m_Layer: 13
   m_Name: Skeleton Necromancer
@@ -199,24 +198,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7152196743466230059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020091705983700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9902cfaa3d231954e8921fde79f56dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HurtarrAudio:
-  - {fileID: 8300000, guid: d1bef3102d08ba944ac7bcac65733a26, type: 3}
-  hurtVolumeScale: 0.8
-  DieAudio:
-  - {fileID: 8300000, guid: 291608b8d286e2a4580ff36324455ce2, type: 3}
-  dieVolumeScale: 0.8
 --- !u!82 &-7744195317057086508
 AudioSource:
   m_ObjectHideFlags: 0
