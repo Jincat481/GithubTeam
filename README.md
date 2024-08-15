@@ -155,9 +155,18 @@
 
 ----------------------------------------------------------------
 
-# 컨셉시안
+# PC 컨셉시안
 ## ~2024/08/15
+![pc-1](https://github.com/user-attachments/assets/ffc7fdf1-fc37-415c-89a4-a3a65eef3ab2)
+![pc-2](https://github.com/user-attachments/assets/866a433a-8349-46b6-bb38-8c200d0ffce4)
+![pc-3](https://github.com/user-attachments/assets/86d8b50b-5ee5-4f60-8ef4-4720b14336d5)
 
+----------------------------------------------------------------
+
+# BOSS 컨셉시안
+## ~2024/08/15
+![보스-1](https://github.com/user-attachments/assets/63383ae9-30ff-4f81-9a38-6ec1137850e3)
+![음악가](https://github.com/user-attachments/assets/1cc3fbc3-b92b-42bb-a692-a117012f4a2a)
 
 ---
 # 기획
