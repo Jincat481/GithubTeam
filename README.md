@@ -158,6 +158,16 @@
 # 컨셉시안
 ## ~2024/08/15
 
+### 강정윤
+## ~2024/08/15
+![1](https://github.com/user-attachments/assets/f6622987-9fba-4aab-bb96-55c30909e8a8)
+![2](https://github.com/user-attachments/assets/ecb0250a-10a7-4c41-b254-6c970d7515e6)
+![3](https://github.com/user-attachments/assets/34c3069b-ca7f-4a7d-b45e-04e46809495e)
+![3-1](https://github.com/user-attachments/assets/5628e0c2-d653-40ce-8ccb-71c9813e688b)
+![4](https://github.com/user-attachments/assets/516ccb12-1cbf-4a09-88c1-397ce9982500)
+![5](https://github.com/user-attachments/assets/b6d46415-8e23-4587-b3d9-7ac2a6421012)
+![6](https://github.com/user-attachments/assets/4bedb3d5-6327-4f46-aff4-40e51da6d384)
+![7](https://github.com/user-attachments/assets/39b5560f-6ca5-422b-abf4-cf68f5bb620e)
 
 ---
 # 기획
