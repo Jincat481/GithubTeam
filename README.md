@@ -180,7 +180,17 @@
 ![뱀파이어](https://github.com/user-attachments/assets/1be5a7da-bb86-456f-b484-b48fedaa7333)
 ![파라오](https://github.com/user-attachments/assets/028680d4-72ee-4429-a315-62fa27fd2972)
 ![파리 스케치완2](https://github.com/user-attachments/assets/6de48799-12db-4290-bae1-7b88d9a7a852)
-![파리 스케치완](https://github.com/user-attachments/assets/57e80f70-cc7d-4eaf-bcb0-dbbef6d7731a)
+![파리 스케치완](https://github.com/user-attachments/assets/57e80f70-cc7d-4eaf-bcb0-dbbef6d7731a
+
+
+-------------------------------------------------------------------
+
+# GUI
+## ~2024/08/15
+![boss hp](https://github.com/user-attachments/assets/51c735b8-68dd-432c-9797-3c2218ca8c6b)
+![pc hp](https://github.com/user-attachments/assets/f0ef911a-66d7-441f-9d54-d71f67b83e85)
+![hp바](https://github.com/user-attachments/assets/15edf53c-603a-43f8-9a94-895a16d8b70d)
+
 
 
 ---
