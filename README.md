@@ -179,8 +179,9 @@
 ![돼지](https://github.com/user-attachments/assets/c622e818-a70a-4801-8be0-99a03f994aff)
 ![뱀파이어](https://github.com/user-attachments/assets/1be5a7da-bb86-456f-b484-b48fedaa7333)
 ![파라오](https://github.com/user-attachments/assets/028680d4-72ee-4429-a315-62fa27fd2972)
-![파리 스케치완2](https://github.com/user-attachments/assets/6de4![파리 스케치완](https://github.com/user-attachments/assets/57e80f70-cc7d-4eaf-bcb0-dbbef6d7731a)
-8799-12db-4290-bae1-7b88d9a7a852)
+![파리 스케치완2](https://github.com/user-attachments/assets/6de48799-12db-4290-bae1-7b88d9a7a852)
+![파리 스케치완](https://github.com/user-attachments/assets/57e80f70-cc7d-4eaf-bcb0-dbbef6d7731a)
+
 
 ---
 
