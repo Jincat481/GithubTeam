@@ -243,9 +243,10 @@
 * 2024-08-15 보스 스킬 1/2/3/4/5 수치 조정함. / 상시 스포너 수치 조정함 / 유니티 프리팹,부모자식 시스템 공부함 
 
 ## 고아라
+### 2024.08.15
+* 발표회용 ppt + 사용한 폰트 포함 [ppt발표용자료.zip](https://github.com/user-attachments/files/16624472/ppt.zip)
 
-* 발표회용 ppt틀[DDD발표ppt.pptx](https://github.com/user-attachments/files/16622869/DDD.ppt.pptx)
-
+* 유니티 공부
 
 ## 김혜진
 ### 2024.08.15
