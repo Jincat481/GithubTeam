@@ -18,11 +18,16 @@ public class BossHP : MonoBehaviour
     }
     public GameObject portal;
     public bossHpData bossData;
+    public GameObject soundManger;
+    private AudioSource audioSource;
+    private MsoundManger hurtaudio;
 
     // Start is called before the first frame update
     void Start()
     {
         bossData.bossCurrentHp = bossData.bossMaxHp;
+        hurtaudio = soundManger.GetComponent<MsoundManger>();
+        audioSource = soundManger.GetComponent<AudioSource>(); // audioSource 초기화
     }
 
     // Update is called once per frame
@@ -37,7 +42,7 @@ public class BossHP : MonoBehaviour
     public void TakeDamage(float Damage){
         float damagePercentage = (Damage / bossData.bossMaxHp) * 100f;
         bossData.bossCurrentHp -= damagePercentage;
-
+        audioSource.PlayOneShot(hurtaudio.BossHurtAudio, hurtaudio.BossHurtVolumeScale);
         Debug.Log("보스 현재 체력: "+bossData.bossCurrentHp);
     }
 }

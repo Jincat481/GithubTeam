@@ -24,6 +24,7 @@ TagManager:
   - MonsterSpawner
   - pattern3
   - Pattern4Object
+  - MsoundManger
   layers:
   - Default
   - TransparentFX

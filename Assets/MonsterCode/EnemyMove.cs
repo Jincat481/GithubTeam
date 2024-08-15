@@ -20,6 +20,10 @@ public class EnemyMove : MonoBehaviour
     Collider2D cl;
     PlayerController playerScript;
 
+    // 사운드 매니저
+    private GameObject soundManger;
+    private MsoundManger soundMangerScript;
+
     bool ishurt = false;
     public void Start()
     {
@@ -30,6 +34,8 @@ public class EnemyMove : MonoBehaviour
         anim = GetComponent<Animator>();
         anim.SetBool("IsIdle", true);
 
+        soundManger = GameObject.FindWithTag("MsoundManger");
+        soundMangerScript = soundManger.GetComponent<MsoundManger>();
         cl = GetComponent<Collider2D>();
 
         agent = GetComponent<NavMeshAgent>();
@@ -75,10 +81,7 @@ public class EnemyMove : MonoBehaviour
         rigid.velocity = Vector3.zero;
         if (health > 0f)
         {
-            //int sel = Random.Range(0, hurtAudioClip.Length);
-            //audioSource.Stop();
-            //audioSource.PlayOneShot(hurtAudioClip[sel], playOneShot.hurtVolumeScale);
-
+            soundManger.GetComponent<AudioSource>().PlayOneShot(soundMangerScript.EnemyHurtAudio, soundMangerScript.EnemyHurtVolumeScale);
             anim.SetTrigger("IsHurt");
         }
         else
