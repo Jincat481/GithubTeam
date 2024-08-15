@@ -234,6 +234,8 @@
  
 * [2024-08-08 팀플 파일](https://drive.google.com/file/d/1F5m3buIhUa8frPhTY7O66XNq5T25jXvO/view?usp=drive_link)
 
+* 2024-08-15 보스 스킬 1/2/3/4/5 수치 조정함. / 상시 스포너 수치 조정함 / 유니티 프리팹,부모자식 시스템 공부함 
+
 ## 고아라
 
 * 발표회용 ppt틀[DDD발표ppt.pptx](https://github.com/user-attachments/files/16622869/DDD.ppt.pptx)
