@@ -211,6 +211,13 @@
 ![7](https://github.com/user-attachments/assets/39b5560f-6ca5-422b-abf4-cf68f5bb620e)
 
 
+
+---
+## 2024/08/15
+![8](https://github.com/user-attachments/assets/893d89d0-a730-404e-a6b9-e78134bf846c)
+
+
+
 ---
 # 기획
 
