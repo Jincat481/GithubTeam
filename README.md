@@ -198,6 +198,10 @@
 ![pc hp](https://github.com/user-attachments/assets/f0ef911a-66d7-441f-9d54-d71f67b83e85)
 ![hp바](https://github.com/user-attachments/assets/15edf53c-603a-43f8-9a94-895a16d8b70d)
 
+# ppt용 시놉시스 컷
+## 2024/08/15
+![시놈시스 컷](https://github.com/user-attachments/assets/8781f2c3-a604-4ee1-9ca0-38bb85d6341d)
+
 
 
 ---
