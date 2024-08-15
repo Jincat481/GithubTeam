@@ -124,8 +124,11 @@ public class BossSkill : MonoBehaviour
                     }
                 }
             }
-            SkillData currentSkillData = SkillDataDictionary[currentState];
-            ExecuteSkill(currentSkillData);
+            if (currentState != State.Idle)
+            {
+                SkillData currentSkillData = SkillDataDictionary[currentState];
+                ExecuteSkill(currentSkillData);
+            }
         }
     }
 
@@ -304,6 +307,8 @@ public class BossSkill : MonoBehaviour
     {
         skill4.Skill4End = false;
         directiontoPlayer();
+        skill4Script.animatorSpeed = skill4.ObjectSpeed;
+        skill4Script.SkillretentionTime = skill4.SkillretentionTime;
         skill4Script.direction = directiontoplayer;
         skill4Script.Skill4Start();
         yield return new WaitUntil(() => skill4.Skill4End); // 스킬이 끝날 때 까지 기다림
@@ -313,6 +318,8 @@ public class BossSkill : MonoBehaviour
     IEnumerator Skill5ExecuteAfterDelay(Skill5Data skill5)
     {
         skill5.Skill5End = false;
+        skill5Script.animationSpeed = skill5.ObjectSpeed;
+        skill5Script.SkillretentionTime = skill5.SkillretentionTime;
         skill5Script.Skill5Start();
         yield return new WaitUntil(() => skill5.Skill5End);
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill5));

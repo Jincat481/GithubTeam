@@ -1855,6 +1855,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &472589713 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 709859522631185739, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+  m_PrefabInstance: {fileID: 45988606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &503206099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,7 +2161,7 @@ MonoBehaviour:
   Delay_after_using_a_skill: 2
   skill1Data:
     state: 1
-    SkillPrefab: {fileID: 5381990046054827702, guid: e8a5da9b7021c2544813e93ee17ec247, type: 3}
+    SkillPrefab: {fileID: 490820857029706447, guid: 5dd3a951e5f73d74b84ca83f10a7022e, type: 3}
     Cooldown: 5
     CurrentCooldown: 0
     Damage: 5
@@ -4998,7 +5003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe1c22d4ed51284db73b5b5c9cfed84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 701918130}
+  target: {fileID: 472589713}
   speed: 3
   center: {x: 0.03, y: 0}
   size: {x: 40, y: 28.3}
