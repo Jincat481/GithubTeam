@@ -219,6 +219,11 @@
 * [PC 일반공격 예시](https://1drv.ms/p/s!AjVAqgUDPzKVlhuXhrqrm6UY946D) (타겟팅)(임시보류중)
  
 * [2024-08-08 팀플 파일](https://drive.google.com/file/d/1F5m3buIhUa8frPhTY7O66XNq5T25jXvO/view?usp=drive_link)
+
+## 고아라
+
+* 발표회용 ppt틀[DDD발표ppt.pptx](https://github.com/user-attachments/files/16622869/DDD.ppt.pptx)
+
 ---
 # 팀원
 기획 :
