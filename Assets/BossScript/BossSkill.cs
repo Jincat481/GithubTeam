@@ -40,6 +40,8 @@ public class BossSkill : MonoBehaviour
     public class Skill2Data : SkillData
     {
         public GameObject Skill2_WarningPrefab;
+        public float addAngle;
+        public int objectCount;
         public float warningTime;
         public float ObjectDestroytime;
     }
@@ -76,7 +78,6 @@ public class BossSkill : MonoBehaviour
     private Dictionary<State, SkillData> SkillDataDictionary;
 
     private GameObject Player;
-    private float[] initialAngle = new float[4];
     private Skill4 skill4Script;
     private Skill5 skill5Script;
     Vector2 directiontoplayer;
@@ -203,23 +204,30 @@ public class BossSkill : MonoBehaviour
 
     IEnumerator DelayafterSkill2execution(Skill2Data skill2)
     {
+        if (skill2.objectCount <= 0)
+        {
+            Debug.Log("스킬2의 피사체 개수를 0보다 크게 설정하세요.");
+            SetIdleAfterDelay(skill2);
+            yield break; // objectCount가 0이거나 음수일 경우, 코루틴을 종료
+        }
         // 현재 객체와 플레이어 객체 간의 방향 벡터 계산
         directiontoPlayer();
 
         // 각도 계산
         float angle = Mathf.Atan2(directiontoplayer.y, directiontoplayer.x) * Mathf.Rad2Deg;
 
+        float[] initialAngle = new float[skill2.objectCount];
         // 초기 회전 값을 저장
         initialAngle[0] = angle;
 
         // 회전 값을 배열에 저장
-        for (int i = 1; i < 4; i++)
+        for (int i = 1; i < skill2.objectCount; i++)
         {
-            initialAngle[i] = initialAngle[i - 1] + 90f;
+            initialAngle[i] = initialAngle[i - 1] + skill2.addAngle;
         }
 
         // 경고 선을 표시
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < skill2.objectCount; i++)
         {
             GameObject skill2WarningObject = Instantiate(skill2.Skill2_WarningPrefab, transform.position, Quaternion.identity);
 
@@ -231,7 +239,7 @@ public class BossSkill : MonoBehaviour
         yield return new WaitForSeconds(skill2.warningTime);
 
         // 경고 선 표시가 끝나면 피사체 발사
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < skill2.objectCount; i++)
         {
             GameObject skill2Object = Instantiate(skill2.SkillPrefab, transform.position, Quaternion.identity);
 
@@ -243,9 +251,7 @@ public class BossSkill : MonoBehaviour
             skill2Script.initialAngle = initialAngle[i];
             skill2Script.ObjectDestroytime = skill2.ObjectDestroytime;
         }
-        yield return new WaitForSeconds(skill2.ObjectDestroytime);
-
-        SetIdleAfterDelay(skill2);
+        StartCoroutine(SkillEndDelay(skill2.ObjectDestroytime, skill2));
     }
 
     void FiringRadialProjectiles(Skill3Data skill3)
