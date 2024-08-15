@@ -14,6 +14,7 @@ public class Skill5 : MonoBehaviour
     public float Damage;
     Collider2D cl;
     BossSkill bossSkill;
+    private ParticleSystem particle;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class Skill5 : MonoBehaviour
         renderer.enabled = false;
         bossSkill = GetComponentInParent<BossSkill>();
         cl = GetComponent<Collider2D>();
+        particle = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -59,7 +61,10 @@ public class Skill5 : MonoBehaviour
     {
         cl.enabled = true;
         Skill5AreaRenderer.enabled = true;
+        particle.Play();
         yield return new WaitForSeconds(SkillretentionTime);
+        particle.Stop();
+        particle.Clear();
         cl.enabled = false;
         Skill5AreaRenderer.enabled = false;
         renderer.enabled = false;
