@@ -147,7 +147,7 @@
 
 ---
 # 그래픽
-# 맵
+## 맵
 ## ~2024/08/15
 ![배경-1sss](https://github.com/user-attachments/assets/01105d8a-0e44-4e3b-9a1f-a2df45890d3d)
 ![배경-1ss](https://github.com/user-attachments/assets/c859690c-8cc3-498f-8b3e-ad7f8d7e75df)
@@ -161,6 +161,7 @@
 ![pc-2](https://github.com/user-attachments/assets/866a433a-8349-46b6-bb38-8c200d0ffce4)
 ![pc-3](https://github.com/user-attachments/assets/86d8b50b-5ee5-4f60-8ef4-4720b14336d5)
 
+
 ----------------------------------------------------------------
 
 # BOSS 컨셉시안
@@ -169,9 +170,23 @@
 ![음악가](https://github.com/user-attachments/assets/1cc3fbc3-b92b-42bb-a692-a117012f4a2a)
 
 ---
+
+## 강정윤
+## ~2024/08/15
+![1](https://github.com/user-attachments/assets/f6622987-9fba-4aab-bb96-55c30909e8a8)
+![2](https://github.com/user-attachments/assets/ecb0250a-10a7-4c41-b254-6c970d7515e6)
+![3](https://github.com/user-attachments/assets/34c3069b-ca7f-4a7d-b45e-04e46809495e)
+![3-1](https://github.com/user-attachments/assets/5628e0c2-d653-40ce-8ccb-71c9813e688b)
+![4](https://github.com/user-attachments/assets/516ccb12-1cbf-4a09-88c1-397ce9982500)
+![5](https://github.com/user-attachments/assets/b6d46415-8e23-4587-b3d9-7ac2a6421012)
+![6](https://github.com/user-attachments/assets/4bedb3d5-6327-4f46-aff4-40e51da6d384)
+![7](https://github.com/user-attachments/assets/39b5560f-6ca5-422b-abf4-cf68f5bb620e)
+
+
+---
 # 기획
 
-### 홍석윤-PC담당
+## 홍석윤-PC담당
 
 * [능력치 비율표](https://1drv.ms/p/s!AjVAqgUDPzKVlhne_ImWUL81t-4Y) (크기/공격력/체력 등 변수 비율 확인용 표)
 
