@@ -238,11 +238,11 @@
 
 
 ## 김혜진
-(2024.08.15)
-- 발표회 제출용 리플렛 작업: https://drive.google.com/file/d/1-QgjVnAt8K0XwzP-HhdcocrJ5zjn2r0O/view?usp=drive_link
-- 영상 편집 공부1: https://youtu.be/YA2s5DcC9-Y?si=8fGkPiPyjYovsZlt
-- 영상 편집 공부2: https://youtu.be/nnFdtKA8acM?si=0FRxltdq7a3kgS3z
-- 영상에 사용하려는 bgm: https://www.youtube.com/watch?v=YyknBTm_YyM
+### 2024.08.15
+- [발표회 제출용 리플렛 작업](https://drive.google.com/file/d/1-QgjVnAt8K0XwzP-HhdcocrJ5zjn2r0O/view?usp=drive_link)
+- [영상 편집 공부1](https://youtu.be/YA2s5DcC9-Y?si=8fGkPiPyjYovsZlt)
+- [영상 편집 공부2](https://youtu.be/nnFdtKA8acM?si=0FRxltdq7a3kgS3z)
+- [영상에 사용하려는 bgm](https://www.youtube.com/watch?v=YyknBTm_YyM)
 
 ---
 # 팀원
