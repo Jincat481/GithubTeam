@@ -147,7 +147,7 @@
 
 ---
 # 그래픽
-# 맵
+## 맵
 ## ~2024/08/15
 ![배경-1sss](https://github.com/user-attachments/assets/01105d8a-0e44-4e3b-9a1f-a2df45890d3d)
 ![배경-1ss](https://github.com/user-attachments/assets/c859690c-8cc3-498f-8b3e-ad7f8d7e75df)
@@ -158,7 +158,7 @@
 # 컨셉시안
 ## ~2024/08/15
 
-### 강정윤
+## 강정윤
 ## ~2024/08/15
 ![1](https://github.com/user-attachments/assets/f6622987-9fba-4aab-bb96-55c30909e8a8)
 ![2](https://github.com/user-attachments/assets/ecb0250a-10a7-4c41-b254-6c970d7515e6)
@@ -172,7 +172,7 @@
 ---
 # 기획
 
-### 홍석윤-PC담당
+## 홍석윤-PC담당
 
 * [능력치 비율표](https://1drv.ms/p/s!AjVAqgUDPzKVlhne_ImWUL81t-4Y) (크기/공격력/체력 등 변수 비율 확인용 표)
 
