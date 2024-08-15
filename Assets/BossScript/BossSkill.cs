@@ -80,6 +80,7 @@ public class BossSkill : MonoBehaviour
     private Skill4 skill4Script;
     private Skill5 skill5Script;
     Vector2 directiontoplayer;
+    public bool test;
     void Start()
     {
         currentState = State.Idle;
@@ -107,8 +108,22 @@ public class BossSkill : MonoBehaviour
 
         if (currentState == State.Idle)
         {
-            int randomState = Random.Range(1, 6); // 1~ 6의 랜덤한 값을 뽑아냄
-            currentState = (State)randomState;
+            if (!test)
+            {
+                int randomState = Random.Range(1, 6); // 1~ 6의 랜덤한 값을 뽑아냄
+                currentState = (State)randomState;
+            }
+            if (test)
+            {
+                int enumlength = System.Enum.GetValues(typeof(State)).Length;
+                for (int i = 0; i < enumlength; i++)
+                {
+                    if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + i)))
+                    {
+                        currentState = (State)i;
+                    }
+                }
+            }
             SkillData currentSkillData = SkillDataDictionary[currentState];
             ExecuteSkill(currentSkillData);
         }
@@ -186,7 +201,7 @@ public class BossSkill : MonoBehaviour
             yield return new WaitForSeconds(skill1.Duration);
         }
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill1));
-        
+
     }
 
     IEnumerator DelayafterSkill2execution(Skill2Data skill2)
