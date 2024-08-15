@@ -9,7 +9,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Collider2D attackCollider; // 공격 콜라이더 (Is Trigger로 설정)
     [SerializeField] private PlayerController playerController; // PlayerController 참조
 
+    // 이펙트 및 사운드 관련 변수
+    [SerializeField] private PlayerEffects playerEffects; // 플레이어 이펙트 스크립트
+    [SerializeField] private SoundManager soundManager; // 사운드 매니저
+
     private float timeUntilMelee; // 공격 쿨타임
+    private bool isAttackColliderActive = false; // 공격 콜라이더 활성화 상태
 
     private void Update()
     {
@@ -38,6 +43,18 @@ public class PlayerAttack : MonoBehaviour
 
             // 쿨타임 초기화
             timeUntilMelee = meleeSpeed;
+
+            // 공격 이펙트 재생
+            if (playerEffects != null)
+            {
+                playerEffects.PlayAttackEffect();
+            }
+
+            // 공격 사운드 재생
+            if (soundManager != null)
+            {
+                soundManager.Play("Attack");
+            }
         }
     }
 
@@ -47,53 +64,58 @@ public class PlayerAttack : MonoBehaviour
         float attackAnimationLength = anim.GetCurrentAnimatorStateInfo(0).length;
 
         // 공격 콜라이더 활성화
+        isAttackColliderActive = true;
         attackCollider.enabled = true;
 
         // 애니메이션 길이 동안 대기
         yield return new WaitForSeconds(attackAnimationLength);
 
         // 공격 콜라이더 비활성화
+        isAttackColliderActive = false;
         attackCollider.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // 트리거된 오브젝트가 적인 경우 데미지 적용
-        bool damageApplied = false; // 데미지 적용 여부를 확인하기 위한 변수
-
-        if (other.CompareTag("Enemy"))
+        // 공격 콜라이더가 활성화된 상태에서만 데미지 적용
+        if (isAttackColliderActive)
         {
-            EnemyMove enemyMove = other.GetComponent<EnemyMove>();
-            if (enemyMove != null)
+            bool damageApplied = false; // 데미지 적용 여부를 확인하기 위한 변수
+
+            if (other.CompareTag("Enemy"))
             {
-                enemyMove.TakeDamage(damage); // 데미지 적용
-                Debug.Log("적에게 공격 성공");
-                damageApplied = true;
+                EnemyMove enemyMove = other.GetComponent<EnemyMove>();
+                if (enemyMove != null)
+                {
+                    enemyMove.TakeDamage(damage); // 데미지 적용
+                    Debug.Log("적에게 공격 성공");
+                    damageApplied = true;
+                }
+
+                RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
+                if (rangedMonster != null)
+                {
+                    rangedMonster.TakeDamage(damage); // 데미지 적용
+                    Debug.Log("원거리 몬스터에게 공격 성공");
+                    damageApplied = true;
+                }
+            }
+            else if (other.CompareTag("Boss"))
+            {
+                BossHP boss = other.GetComponent<BossHP>();
+                if (boss != null)
+                {
+                    boss.TakeDamage(damage); // 데미지 적용
+                    Debug.Log("보스에게 공격 성공");
+                    damageApplied = true;
+                }
             }
 
-            RangedMonster rangedMonster = other.GetComponent<RangedMonster>();
-            if (rangedMonster != null)
+            // 데미지가 적용되었을 경우 대쉬 쿨타임 감소
+            if (damageApplied)
             {
-                rangedMonster.TakeDamage(damage); // 데미지 적용
-                Debug.Log("원거리 몬스터에게 공격 성공");
-                damageApplied = true;
+                ReduceDashCooldown();
             }
-        }
-        else if (other.CompareTag("Boss"))
-        {
-            BossHP boss = other.GetComponent<BossHP>();
-            if (boss != null)
-            {
-                boss.TakeDamage(damage); // 데미지 적용
-                Debug.Log("보스에게 공격 성공");
-                damageApplied = true;
-            }
-        }
-
-        // 데미지가 적용되었을 경우 대쉬 쿨타임 감소
-        if (damageApplied)
-        {
-            ReduceDashCooldown();
         }
     }
 
