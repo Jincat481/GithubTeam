@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class BossSkill : MonoBehaviour
 {
@@ -192,10 +193,20 @@ public class BossSkill : MonoBehaviour
     {
         for (int i = 0; i < skill1.ObjectCount; i++)
         {
-            GameObject skill1Object = Instantiate(skill1.SkillPrefab, transform.position, Quaternion.identity);
-            Skill1Projectile skill1Script = skill1Object.AddComponent<Skill1Projectile>();
+            GameObject skill1Object = ObjectPoolManger.SpawnObject(skill1.SkillPrefab, transform.position, Quaternion.identity, ObjectPoolManger.PoolType.GameObject);
+            Skill1Projectile skill1Script;
+            if (skill1Object.GetComponent<Skill1Projectile>() == null)
+            {
+                skill1Script = skill1Object.AddComponent<Skill1Projectile>();
+            }
+            else
+            {
+                skill1Script = skill1Object.GetComponent<Skill1Projectile>();
+            }
+            skill1Script.Player = Player;
             skill1Script.Damage = skill1.Damage;
             skill1Script.Speed = skill1.ObjectSpeed;
+            skill1Script.SetToPlayerPosition();
             yield return new WaitForSeconds(skill1.Duration);
         }
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill1));
