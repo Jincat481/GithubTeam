@@ -26,7 +26,7 @@ public class PlayerCollisionCheck : MonoBehaviour
         if (o.gameObject.CompareTag("Player"))
         {
             skill1Projectile.Player.GetComponent<PlayerController>().TakeDamage(skill1Projectile.Damage);
-            Destroy(gameObject);
+            ObjectPoolManger.ReturnObjectToPool(gameObject);
         }
     }
 }

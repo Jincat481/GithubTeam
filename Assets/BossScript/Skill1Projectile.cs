@@ -14,7 +14,17 @@ public class Skill1Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.FindWithTag("Player");
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void SetToPlayerPosition()
+    {
         PlayerTransform = Player.transform;
         direction = PlayerTransform.position - transform.position;
 
@@ -27,11 +37,5 @@ public class Skill1Projectile : MonoBehaviour
 
         // 각도 설정
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

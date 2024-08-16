@@ -7,7 +7,35 @@ public class ObjectPoolManger : MonoBehaviour
 {
     public static List<PoolObjectInfo> ObjectPools = new List<PoolObjectInfo>();
 
-    public static GameObject SpawnObject(GameObject objcetToSpawn, Vector2 spawnPosition, Quaternion spawnRotation)
+    private GameObject _objectPoolEmptyHolder;
+
+    private static GameObject _particleSystemsEmpty;
+    private static GameObject _gameObjectsEmpty;
+
+    public enum PoolType
+    {
+        ParticleSystem,
+        GameObject,
+        None
+    }
+    public static PoolType PoolingType;
+
+    private void Awake()
+    {
+        SetupEmpties();
+    }
+
+    private void SetupEmpties()
+    {
+        _objectPoolEmptyHolder = new GameObject("Pooled Objects");
+
+        _particleSystemsEmpty = new GameObject("Particle Effects");
+        _particleSystemsEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
+
+        _gameObjectsEmpty = new GameObject("GameObjects");
+        _gameObjectsEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
+    }
+    public static GameObject SpawnObject(GameObject objcetToSpawn, Vector2 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
     {
         PoolObjectInfo pool = ObjectPools.Find(p => p.LookupString == objcetToSpawn.name);
 
@@ -20,9 +48,9 @@ public class ObjectPoolManger : MonoBehaviour
         //         break;
         //     }
         // }
-        
+
         // If the pool doesn't exist, creat it
-        if(pool == null)
+        if (pool == null)
         {
             pool = new PoolObjectInfo() { LookupString = objcetToSpawn.name };
             ObjectPools.Add(pool);
@@ -42,10 +70,18 @@ public class ObjectPoolManger : MonoBehaviour
         // }
 
         // 비활성 게임 개체 목록에서 무엇을 찾았는지 확인
-        if(spawnableObj == null)
+        if (spawnableObj == null)
         {
+            //Find the parent of the empty object
+            GameObject parentObject = SetParenObject(poolType);
+
             //If there are no inactivate objects, create a new one
             spawnableObj = Instantiate(objcetToSpawn, spawnPosition, spawnRotation);
+
+            if (parentObject != null)
+            {
+                spawnableObj.transform.SetParent(parentObject.transform);
+            }
         }
 
         else
@@ -59,14 +95,14 @@ public class ObjectPoolManger : MonoBehaviour
 
         return spawnableObj;
     }
-    
-    public static void ReturnObjectToPool(GameObject obj)
+
+    public static void ReturnObjectToPool(GameObject obj, PoolType poolType = PoolType.None)
     {
         string goName = obj.name.Substring(0, obj.name.Length - 7); // by taking off 7, we are removing the (Clone) from the name of the passed in obj
 
         PoolObjectInfo pool = ObjectPools.Find(p => p.LookupString == goName);
 
-        if(pool == null)
+        if (pool == null)
         {
             Debug.LogWarning("Trying to release an object that is not pooled: " + obj.name);
         }
@@ -74,7 +110,30 @@ public class ObjectPoolManger : MonoBehaviour
         else
         {
             obj.SetActive(false);
+            GameObject parentObject = SetParenObject(poolType);
+            if (parentObject != null)
+            {
+                obj.transform.SetParent(parentObject.transform);
+            }
             pool.InactiveObjects.Add(obj);
+        }
+    }
+
+    private static GameObject SetParenObject(PoolType poolType)
+    {
+        switch (poolType)
+        {
+            case PoolType.ParticleSystem:
+                return _particleSystemsEmpty;
+
+            case PoolType.GameObject:
+                return _gameObjectsEmpty;
+
+            case PoolType.None:
+                return null;
+
+            default:
+                return null;
         }
     }
 }
