@@ -90,6 +90,13 @@
 * 스킬 2 피사체 추가 각도 설정 및 오브젝트 개수 설정 인스펙터 창에서 수정 가능하게 추가
 * 스킬 5 파티클 추가
 ---
+## 2024/08/16
+* 보스 스킬 3번 방사형 투사체의 프리팹이 바뀌면서 플레이어랑 충돌해도 데미지를 안 입고 밀려나던 문제를 해결
+* 보스 스킬 1번 프리팹에 속도 및 방향 설정하던 코드를 보스가 스킬 실행하는 코드로 옮겨 프리팹 재활용 가능하게 제작
+* 스킬 데이터에 데미지를 스킬에 맞게 데미지가 들어가도록 수정
+* 보스 프리팹 추가 및 스킬 2번 몬스터 스포너 추가
+* 스킬 3번 방사형 투사체에 추가 발사 횟수 및 발사 간격 추가
+---
 # 몬스터 스포너 구현 사항
 ## 2024/08/02 현재 프로토타입 버전
   * 인스펙터 창에서 설정할 수 있는 것들
@@ -139,6 +146,10 @@
 
   피격 사운드, 사망 사운드 구현 및 버그 수정
 ---
+## 2024/08/16
+* 근거리 몬스터
+
+  사망 애니메이션 교체 및 스프라이트 교체
 # 플레이어 구현 사항
 ## 2024/08/02 현재 프로토타입 버전
   * 공격 관련 버그로 인해 처음부터 다시 구현하는 중
@@ -152,7 +163,15 @@
 ## 2024/08/14
   * 근접 공격 버그 플레이어 부딪 히면 공격이 들어감 콜라이더 문제로 보임 
 ---
-
+# 매니저 구현
+## 2024/08/16
+* 풀 매니저 구현 완료
+* 게임 오브젝트 불러오기
+* ObjectPoolManger.SpawnObject(GameObject gameobject, Vector2 spawnPosition, Quaternion SpawnRotation, PoolType poolType)
+* 게임 오브젝트, 스폰 포지션, 회전값, ObjectPoolManger.PoolType.게임오브젝트 혹은 파티클 아무것도 안 적으면 Null로 처리
+* 게임 오브젝트 다시 풀 보관함으로
+* ObjectPoolManger.ReturnObjectToPool(Gameobject gameobject, PoolType poolType)
+* 현재 게임오브젝트 적고 풀 타입 적으면 됨
 ---
 # 그래픽
 ## 김성철
@@ -161,6 +180,9 @@
 ![배경-1sss](https://github.com/user-attachments/assets/01105d8a-0e44-4e3b-9a1f-a2df45890d3d)
 ![배경-1ss](https://github.com/user-attachments/assets/c859690c-8cc3-498f-8b3e-ad7f8d7e75df)
 ![배경](https://github.com/user-attachments/assets/46f6ad95-a26c-4380-95a2-bd068c51d466)
+## 2024/08/16
+![배경-1-1](https://github.com/user-attachments/assets/f24ec945-cf81-4e74-8080-65d52e367121)
+![배경-1-2](https://github.com/user-attachments/assets/527863c5-fdce-48fd-a07c-fe1c5eef8208)
 
 ----------------------------------------------------------------
 
@@ -202,7 +224,8 @@
 # ppt용 시놉시스 컷
 ## 2024/08/15
 ![시놈시스 컷](https://github.com/user-attachments/assets/8781f2c3-a604-4ee1-9ca0-38bb85d6341d)
-
+## 2024/08/16
+![시놉시스컷-2](https://github.com/user-attachments/assets/1e7130e1-d5cd-4f0d-8c02-0dff8666d9e7)
 
 
 ---
@@ -226,6 +249,12 @@
 ![9](https://github.com/user-attachments/assets/41dcdd89-3ef7-4128-b826-29e550bb0d1e)
 
 
+
+---
+
+## 2024/08/16
+![캡처](https://github.com/user-attachments/assets/c018b6ba-bb69-44e0-9ff6-9e95069c3b48)
+![캡처2](https://github.com/user-attachments/assets/0d9ebb86-a627-451d-9c8e-c93c06b14263)
 
 ---
 # 기획
@@ -262,8 +291,10 @@
 * -투사체 이펙트[effects1.zip](https://github.com/user-attachments/files/16631843/effects1.zip)
 * -레이저 이펙트및 몇몇 이펙트 [effects2.zip](https://github.com/user-attachments/files/16631845/effects2.zip)
 ### 2024.08.16
-*[보스 스킬 이펙트]
-
+*[pc대쉬이펙트]
+-[dash effects.zip](https://github.com/user-attachments/files/16636352/dash.effects.zip)
+[보스 패턴및 수치 조절]
+[보스 패턴 수치.zip](https://github.com/user-attachments/files/16636353/default.zip)
 
 ---
 # 팀원

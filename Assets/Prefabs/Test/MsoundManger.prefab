@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3709993543019365307
+--- !u!1 &5869786034638959656
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8867215302873307957}
-  - component: {fileID: 8315207576149631537}
-  - component: {fileID: 5780791603422887506}
+  - component: {fileID: 3232023659940583658}
+  - component: {fileID: 8122661807707095723}
+  - component: {fileID: 2343486380949167424}
   m_Layer: 0
-  m_Name: MonsterSoundManger
-  m_TagString: Untagged
+  m_Name: MsoundManger
+  m_TagString: MsoundManger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8867215302873307957
+--- !u!4 &3232023659940583658
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709993543019365307}
+  m_GameObject: {fileID: 5869786034638959656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.559324, y: 8.5575075, z: -0.038450435}
+  m_LocalPosition: {x: -0, y: 0.18, z: -0.038450435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &8315207576149631537
+--- !u!114 &8122661807707095723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5869786034638959656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4785489563b725468a051f9448ed694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyHurtAudio: {fileID: 8300000, guid: cbcdeb7927c187f44989aceaa1699571, type: 3}
+  EnemyHurtVolumeScale: 0.8
+  BossHurtAudio: {fileID: 8300000, guid: ebd97a97452553944ae6840fa045c71d, type: 3}
+  BossHurtVolumeScale: 0.5
+--- !u!82 &2343486380949167424
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709993543019365307}
+  m_GameObject: {fileID: 5869786034638959656}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -129,19 +145,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5780791603422887506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3709993543019365307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4785489563b725468a051f9448ed694, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HurtarrAudio: []
-  hurtVolumeScale: 0
-  DieAudio: []
-  dieVolumeScale: 0

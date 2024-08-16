@@ -20,7 +20,7 @@ public class WallsCollisionCheck : MonoBehaviour
     {
         if(o.gameObject.CompareTag("Wall"))
         {
-            Destroy(gameObject);
+            ObjectPoolManger.ReturnObjectToPool(gameObject, ObjectPoolManger.PoolType.GameObject);
         }
     }
 }

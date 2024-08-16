@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class BossSkill : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class BossSkill : MonoBehaviour
         public int objectCount;
         public float warningTime;
         public float ObjectDestroytime;
+        public MonsterSpawnerMK2 monsterSpawnerMK2;
     }
 
     [System.Serializable]
@@ -51,6 +53,8 @@ public class BossSkill : MonoBehaviour
     {
         public float angleToAdd;
         public int ObjectCount;
+        public int IterationCount;
+        public float Duration;
     }
 
     [System.Serializable]
@@ -152,10 +156,7 @@ public class BossSkill : MonoBehaviour
             case State.Skill3:
                 Debug.Log("Skill3 실행");
                 Skill3Data skill3 = (Skill3Data)currentSkillData;
-
-                FiringRadialProjectiles(skill3);
-
-                StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill3));
+                StartCoroutine(FiringRadialProjectiles(skill3));
                 break;
             case State.Skill4:
                 Debug.Log("Skill4 실행");
@@ -192,10 +193,21 @@ public class BossSkill : MonoBehaviour
     {
         for (int i = 0; i < skill1.ObjectCount; i++)
         {
-            GameObject skill1Object = Instantiate(skill1.SkillPrefab, transform.position, Quaternion.identity);
-            Skill1Projectile skill1Script = skill1Object.AddComponent<Skill1Projectile>();
-            skill1Script.Damage = skill1.Damage;
-            skill1Script.Speed = skill1.ObjectSpeed;
+            GameObject skill1Object = ObjectPoolManger.SpawnObject(skill1.SkillPrefab, transform.position, Quaternion.identity, ObjectPoolManger.PoolType.GameObject);
+
+            PlayerCollisionCheck playerCollisionCheck = skill1Object.GetComponent<PlayerCollisionCheck>();
+            var direction = Player.transform.position - transform.position;
+
+            // 플레이어에게 날아가는 속도 수정
+            Rigidbody2D rb = skill1Object.GetComponent<Rigidbody2D>();
+            rb.velocity = direction.normalized * skill1.ObjectSpeed;
+
+            // 각도 계산
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // 각도 설정
+            skill1Object.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            playerCollisionCheck.Damage = skill1.Damage;
             yield return new WaitForSeconds(skill1.Duration);
         }
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill1));
@@ -251,10 +263,11 @@ public class BossSkill : MonoBehaviour
             skill2Script.initialAngle = initialAngle[i];
             skill2Script.ObjectDestroytime = skill2.ObjectDestroytime;
         }
+        skill2.monsterSpawnerMK2.spawn = true;
         StartCoroutine(SkillEndDelay(skill2.ObjectDestroytime, skill2));
     }
 
-    void FiringRadialProjectiles(Skill3Data skill3)
+    IEnumerator FiringRadialProjectiles(Skill3Data skill3)
     {
         // 기본 방향 설정 (예: 오른쪽 방향)
         Vector2 baseDirection = new Vector2(1, 0);
@@ -273,23 +286,27 @@ public class BossSkill : MonoBehaviour
         }
 
         // 각 방향으로 발사체 발사
-        foreach (Vector2 direction in directions)
+        for (int i = 0; i < skill3.IterationCount; i++)
         {
-            // 투사체 생성
-            GameObject projectile = Instantiate(skill3.SkillPrefab, transform.position, Quaternion.identity);
+            foreach (Vector2 direction in directions)
+            {
+                // 투사체 생성
+                GameObject projectile = ObjectPoolManger.SpawnObject(skill3.SkillPrefab, transform.position, Quaternion.identity, ObjectPoolManger.PoolType.GameObject);
+                // 투사체 데미지 값 대입
+                PlayerCollisionCheck playerCollisionCheck = projectile.GetComponent<PlayerCollisionCheck>();
+                playerCollisionCheck.Damage = skill3.Damage;
 
-            // 투사체의 회전값 계산
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                // 투사체의 회전값 계산
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-            // 정규화된 방향으로 투사체 발사
-            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-            rb.velocity = direction.normalized * skill3.ObjectSpeed;
-
-            // 투사체에 컴포넌트를 추가하고 데미지 설정한 값을 넣어줌
-            var projectileScript = projectile.AddComponent<FiringRadialProjectileScript>();
-            projectileScript.Damage = skill3.Damage;
+                // 정규화된 방향으로 투사체 발사
+                Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+                rb.velocity = direction.normalized * skill3.ObjectSpeed;
+            }
+            yield return new WaitForSeconds(skill3.Duration);
         }
+        StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill3));
     }
     void InitializeSkillDataDictionary()
     {
