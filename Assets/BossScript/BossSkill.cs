@@ -45,6 +45,7 @@ public class BossSkill : MonoBehaviour
         public int objectCount;
         public float warningTime;
         public float ObjectDestroytime;
+        public MonsterSpawnerMK2 monsterSpawnerMK2;
     }
 
     [System.Serializable]
@@ -194,19 +195,20 @@ public class BossSkill : MonoBehaviour
         for (int i = 0; i < skill1.ObjectCount; i++)
         {
             GameObject skill1Object = ObjectPoolManger.SpawnObject(skill1.SkillPrefab, transform.position, Quaternion.identity, ObjectPoolManger.PoolType.GameObject);
-            Skill1Projectile skill1Script;
-            if (skill1Object.GetComponent<Skill1Projectile>() == null)
-            {
-                skill1Script = skill1Object.AddComponent<Skill1Projectile>();
-            }
-            else
-            {
-                skill1Script = skill1Object.GetComponent<Skill1Projectile>();
-            }
-            skill1Script.Player = Player;
-            skill1Script.Damage = skill1.Damage;
-            skill1Script.Speed = skill1.ObjectSpeed;
-            skill1Script.SetToPlayerPosition();
+            
+            PlayerCollisionCheck playerCollisionCheck = skill1Object.GetComponent<PlayerCollisionCheck>();
+            var direction = Player.transform.position - transform.position;
+
+            // 플레이어에게 날아가는 속도 수정
+            Rigidbody2D rb = skill1Object.GetComponent<Rigidbody2D>();
+            rb.velocity = direction.normalized * skill1.ObjectSpeed;
+
+            // 각도 계산
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // 각도 설정
+            skill1Object.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            playerCollisionCheck.Damage = skill1.Damage;
             yield return new WaitForSeconds(skill1.Duration);
         }
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill1));
@@ -262,6 +264,7 @@ public class BossSkill : MonoBehaviour
             skill2Script.initialAngle = initialAngle[i];
             skill2Script.ObjectDestroytime = skill2.ObjectDestroytime;
         }
+        skill2.monsterSpawnerMK2.spawn = true;
         StartCoroutine(SkillEndDelay(skill2.ObjectDestroytime, skill2));
     }
 
@@ -287,7 +290,10 @@ public class BossSkill : MonoBehaviour
         foreach (Vector2 direction in directions)
         {
             // 투사체 생성
-            GameObject projectile = Instantiate(skill3.SkillPrefab, transform.position, Quaternion.identity);
+            GameObject projectile = ObjectPoolManger.SpawnObject(skill3.SkillPrefab, transform.position, Quaternion.identity, ObjectPoolManger.PoolType.GameObject);
+            // 투사체 데미지 값 대입
+            PlayerCollisionCheck playerCollisionCheck = projectile.GetComponent<PlayerCollisionCheck>();
+            playerCollisionCheck.Damage = skill3.Damage;
 
             // 투사체의 회전값 계산
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -296,10 +302,6 @@ public class BossSkill : MonoBehaviour
             // 정규화된 방향으로 투사체 발사
             Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
             rb.velocity = direction.normalized * skill3.ObjectSpeed;
-
-            // 투사체에 컴포넌트를 추가하고 데미지 설정한 값을 넣어줌
-            var projectileScript = projectile.AddComponent<FiringRadialProjectileScript>();
-            projectileScript.Damage = skill3.Damage;
         }
     }
     void InitializeSkillDataDictionary()

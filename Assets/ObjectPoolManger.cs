@@ -11,7 +11,7 @@ public class ObjectPoolManger : MonoBehaviour
 
     private static GameObject _particleSystemsEmpty;
     private static GameObject _gameObjectsEmpty;
-
+    private static GameObject _noneEmpty;
     public enum PoolType
     {
         ParticleSystem,
@@ -34,7 +34,11 @@ public class ObjectPoolManger : MonoBehaviour
 
         _gameObjectsEmpty = new GameObject("GameObjects");
         _gameObjectsEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
+
+        _noneEmpty = new GameObject("None");
+        _noneEmpty.transform.SetParent(_objectPoolEmptyHolder.transform);
     }
+
     public static GameObject SpawnObject(GameObject objcetToSpawn, Vector2 spawnPosition, Quaternion spawnRotation, PoolType poolType = PoolType.None)
     {
         PoolObjectInfo pool = ObjectPools.Find(p => p.LookupString == objcetToSpawn.name);
@@ -130,7 +134,7 @@ public class ObjectPoolManger : MonoBehaviour
                 return _gameObjectsEmpty;
 
             case PoolType.None:
-                return null;
+                return _noneEmpty;
 
             default:
                 return null;
