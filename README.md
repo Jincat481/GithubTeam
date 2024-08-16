@@ -152,7 +152,15 @@
 ## 2024/08/14
   * 근접 공격 버그 플레이어 부딪 히면 공격이 들어감 콜라이더 문제로 보임 
 ---
-
+# 매니저 구현
+## 2024/08/16
+* 풀 매니저 구현 완료
+* 게임 오브젝트 불러오기
+* ObjectPoolManger.SpawnObject(GameObject gameobject, Vector2 spawnPosition, Quaternion SpawnRotation, PoolType poolType)
+* 게임 오브젝트, 스폰 포지션, 회전값, ObjectPoolManger.PoolType.게임오브젝트 혹은 파티클 아무것도 안 적으면 Null로 처리
+* 게임 오브젝트 다시 풀 보관함으로
+* ObjectPoolManger.ReturnObjectToPool(Gameobject gameobject, PoolType poolType)
+* 현재 게임오브젝트 적고 풀 타입 적으면 됨
 ---
 # 그래픽
 ## 김성철
