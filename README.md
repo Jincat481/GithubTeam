@@ -291,8 +291,10 @@
 * -투사체 이펙트[effects1.zip](https://github.com/user-attachments/files/16631843/effects1.zip)
 * -레이저 이펙트및 몇몇 이펙트 [effects2.zip](https://github.com/user-attachments/files/16631845/effects2.zip)
 ### 2024.08.16
-*[보스 스킬 이펙트]
-
+*[pc대쉬이펙트]
+-[dash effects.zip](https://github.com/user-attachments/files/16636352/dash.effects.zip)
+[보스 패턴및 수치 조절]
+[보스 패턴 수치.zip](https://github.com/user-attachments/files/16636353/default.zip)
 
 ---
 # 팀원
