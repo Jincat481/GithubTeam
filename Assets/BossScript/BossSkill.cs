@@ -40,6 +40,8 @@ public class BossSkill : MonoBehaviour
     public class Skill2Data : SkillData
     {
         public GameObject Skill2_WarningPrefab;
+        public float addAngle;
+        public int objectCount;
         public float warningTime;
         public float ObjectDestroytime;
     }
@@ -76,23 +78,17 @@ public class BossSkill : MonoBehaviour
     private Dictionary<State, SkillData> SkillDataDictionary;
 
     private GameObject Player;
-    private float[] initialAngle = new float[4];
     private Skill4 skill4Script;
     private Skill5 skill5Script;
     Vector2 directiontoplayer;
+    public bool test;
     void Start()
     {
         currentState = State.Idle;
         InitializeSkillDataDictionary();
         Player = GameObject.FindWithTag("Player");
         skill4Script = GetComponentInChildren<Skill4>();
-        skill4Script.SkillretentionTime = skill4Data.SkillretentionTime;
-        skill4Script.Damage = skill4Data.Damage;
-        skill4Script.animatorSpeed = skill4Data.ObjectSpeed;
         skill5Script = GetComponentInChildren<Skill5>();
-        skill5Script.SkillretentionTime = skill5Data.SkillretentionTime;
-        skill5Script.Damage = skill5Data.Damage;
-        skill5Script.animationSpeed = skill5Data.ObjectSpeed;
     }
 
     void Update()
@@ -107,10 +103,27 @@ public class BossSkill : MonoBehaviour
 
         if (currentState == State.Idle)
         {
-            int randomState = Random.Range(1, 6); // 1~ 6의 랜덤한 값을 뽑아냄
-            currentState = (State)randomState;
-            SkillData currentSkillData = SkillDataDictionary[currentState];
-            ExecuteSkill(currentSkillData);
+            if (!test)
+            {
+                int randomState = Random.Range(1, 6); // 1~ 6의 랜덤한 값을 뽑아냄
+                currentState = (State)randomState;
+            }
+            if (test)
+            {
+                int enumlength = System.Enum.GetValues(typeof(State)).Length;
+                for (int i = 0; i < enumlength; i++)
+                {
+                    if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + i)))
+                    {
+                        currentState = (State)i;
+                    }
+                }
+            }
+            if (currentState != State.Idle)
+            {
+                SkillData currentSkillData = SkillDataDictionary[currentState];
+                ExecuteSkill(currentSkillData);
+            }
         }
     }
 
@@ -186,28 +199,35 @@ public class BossSkill : MonoBehaviour
             yield return new WaitForSeconds(skill1.Duration);
         }
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill1));
-        
+
     }
 
     IEnumerator DelayafterSkill2execution(Skill2Data skill2)
     {
+        if (skill2.objectCount <= 0)
+        {
+            Debug.Log("스킬2의 피사체 개수를 0보다 크게 설정하세요.");
+            SetIdleAfterDelay(skill2);
+            yield break; // objectCount가 0이거나 음수일 경우, 코루틴을 종료
+        }
         // 현재 객체와 플레이어 객체 간의 방향 벡터 계산
         directiontoPlayer();
 
         // 각도 계산
         float angle = Mathf.Atan2(directiontoplayer.y, directiontoplayer.x) * Mathf.Rad2Deg;
 
+        float[] initialAngle = new float[skill2.objectCount];
         // 초기 회전 값을 저장
         initialAngle[0] = angle;
 
         // 회전 값을 배열에 저장
-        for (int i = 1; i < 4; i++)
+        for (int i = 1; i < skill2.objectCount; i++)
         {
-            initialAngle[i] = initialAngle[i - 1] + 90f;
+            initialAngle[i] = initialAngle[i - 1] + skill2.addAngle;
         }
 
         // 경고 선을 표시
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < skill2.objectCount; i++)
         {
             GameObject skill2WarningObject = Instantiate(skill2.Skill2_WarningPrefab, transform.position, Quaternion.identity);
 
@@ -219,7 +239,7 @@ public class BossSkill : MonoBehaviour
         yield return new WaitForSeconds(skill2.warningTime);
 
         // 경고 선 표시가 끝나면 피사체 발사
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < skill2.objectCount; i++)
         {
             GameObject skill2Object = Instantiate(skill2.SkillPrefab, transform.position, Quaternion.identity);
 
@@ -231,9 +251,7 @@ public class BossSkill : MonoBehaviour
             skill2Script.initialAngle = initialAngle[i];
             skill2Script.ObjectDestroytime = skill2.ObjectDestroytime;
         }
-        yield return new WaitForSeconds(skill2.ObjectDestroytime);
-
-        SetIdleAfterDelay(skill2);
+        StartCoroutine(SkillEndDelay(skill2.ObjectDestroytime, skill2));
     }
 
     void FiringRadialProjectiles(Skill3Data skill3)
@@ -289,6 +307,9 @@ public class BossSkill : MonoBehaviour
     {
         skill4.Skill4End = false;
         directiontoPlayer();
+        skill4Script.animatorSpeed = skill4.ObjectSpeed;
+        skill4Script.SkillretentionTime = skill4.SkillretentionTime;
+        skill4Script.Damage = skill4.Damage;
         skill4Script.direction = directiontoplayer;
         skill4Script.Skill4Start();
         yield return new WaitUntil(() => skill4.Skill4End); // 스킬이 끝날 때 까지 기다림
@@ -298,6 +319,9 @@ public class BossSkill : MonoBehaviour
     IEnumerator Skill5ExecuteAfterDelay(Skill5Data skill5)
     {
         skill5.Skill5End = false;
+        skill5Script.animationSpeed = skill5.ObjectSpeed;
+        skill5Script.SkillretentionTime = skill5.SkillretentionTime;
+        skill5Script.Damage = skill5.Damage;
         skill5Script.Skill5Start();
         yield return new WaitUntil(() => skill5.Skill5End);
         StartCoroutine(SkillEndDelay(Delay_after_using_a_skill, skill5));

@@ -22525,7 +22525,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1
+  - time: 1.25
     functionName: IsDead
     data: 
     objectReferenceParameter: {fileID: 1020091705983700, guid: 969641ab9ead7b448824084245d9c275, type: 3}
