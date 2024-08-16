@@ -51,11 +51,11 @@ public class EnemyMove : MonoBehaviour
         {
             if (directiontoPlayer < 0)
             {
-                transform.rotation = Quaternion.Euler(0, 180f, 0); // 왼쪽 바라보게 설정
+                transform.rotation = Quaternion.Euler(0, 0, 0); // 왼쪽 바라보게 설정
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, 0, 0); // 오른쪽 방향 바라보게 설정
+                transform.rotation = Quaternion.Euler(0, 180f, 0); // 오른쪽 방향 바라보게 설정
             }
         }
     }
@@ -77,10 +77,10 @@ public class EnemyMove : MonoBehaviour
         health -= damage;
 
         anim.SetBool("IsWalk", false);
-        agent.ResetPath();
         rigid.velocity = Vector3.zero;
         if (health > 0f)
         {
+            agent.ResetPath();
             soundManger.GetComponent<AudioSource>().PlayOneShot(soundMangerScript.EnemyHurtAudio, soundMangerScript.EnemyHurtVolumeScale);
             anim.SetTrigger("IsHurt");
         }

@@ -146,6 +146,10 @@
 
   피격 사운드, 사망 사운드 구현 및 버그 수정
 ---
+## 2024/08/16
+* 근거리 몬스터
+
+  사망 애니메이션 교체 및 스프라이트 교체
 # 플레이어 구현 사항
 ## 2024/08/02 현재 프로토타입 버전
   * 공격 관련 버그로 인해 처음부터 다시 구현하는 중
@@ -245,6 +249,12 @@
 ![9](https://github.com/user-attachments/assets/41dcdd89-3ef7-4128-b826-29e550bb0d1e)
 
 
+
+---
+
+## 2024/08/16
+![캡처](https://github.com/user-attachments/assets/c018b6ba-bb69-44e0-9ff6-9e95069c3b48)
+![캡처2](https://github.com/user-attachments/assets/0d9ebb86-a627-451d-9c8e-c93c06b14263)
 
 ---
 # 기획
