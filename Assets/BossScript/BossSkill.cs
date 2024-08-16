@@ -45,6 +45,7 @@ public class BossSkill : MonoBehaviour
         public int objectCount;
         public float warningTime;
         public float ObjectDestroytime;
+        public MonsterSpawnerMK2 monsterSpawnerMK2;
     }
 
     [System.Serializable]
@@ -263,6 +264,7 @@ public class BossSkill : MonoBehaviour
             skill2Script.initialAngle = initialAngle[i];
             skill2Script.ObjectDestroytime = skill2.ObjectDestroytime;
         }
+        skill2.monsterSpawnerMK2.spawn = true;
         StartCoroutine(SkillEndDelay(skill2.ObjectDestroytime, skill2));
     }
 
