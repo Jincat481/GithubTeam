@@ -274,8 +274,11 @@
 ## 고아라
 ### 2024.08.15
 * 발표회용 ppt + 사용한 폰트 포함 [ppt발표용자료.zip](https://github.com/user-attachments/files/16624472/ppt.zip)
-
 * 유니티 공부
+### 2024.08.16
+*[패턴 수치 조정][스킬 수치 조정.docx](https://github.com/user-attachments/files/16636393/default.docx)
+
+
 
 ## 김혜진
 ### 2024.08.15
