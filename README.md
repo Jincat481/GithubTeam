@@ -90,6 +90,12 @@
 * 스킬 2 피사체 추가 각도 설정 및 오브젝트 개수 설정 인스펙터 창에서 수정 가능하게 추가
 * 스킬 5 파티클 추가
 ---
+## 2024/08/16
+* 보스 스킬 3번 방사형 투사체의 프리팹이 바뀌면서 플레이어랑 충돌해도 데미지를 안 입고 밀려나던 문제를 해결
+* 보스 스킬 1번 프리팹에 속도 및 방향 설정하던 코드를 보스가 스킬 실행하는 코드로 옮겨 프리팹 재활용 가능하게 제작
+* 스킬 데이터에 데미지를 스킬에 맞게 데미지가 들어가도록 수정
+* 보스 프리팹 추가 및 스킬 2번 몬스터 스포너 추가
+---
 # 몬스터 스포너 구현 사항
 ## 2024/08/02 현재 프로토타입 버전
   * 인스펙터 창에서 설정할 수 있는 것들
@@ -152,7 +158,15 @@
 ## 2024/08/14
   * 근접 공격 버그 플레이어 부딪 히면 공격이 들어감 콜라이더 문제로 보임 
 ---
-
+# 매니저 구현
+## 2024/08/16
+* 풀 매니저 구현 완료
+* 게임 오브젝트 불러오기
+* ObjectPoolManger.SpawnObject(GameObject gameobject, Vector2 spawnPosition, Quaternion SpawnRotation, PoolType poolType)
+* 게임 오브젝트, 스폰 포지션, 회전값, ObjectPoolManger.PoolType.게임오브젝트 혹은 파티클 아무것도 안 적으면 Null로 처리
+* 게임 오브젝트 다시 풀 보관함으로
+* ObjectPoolManger.ReturnObjectToPool(Gameobject gameobject, PoolType poolType)
+* 현재 게임오브젝트 적고 풀 타입 적으면 됨
 ---
 # 그래픽
 ## 김성철
@@ -254,6 +268,16 @@
 - [영상 편집 공부1](https://youtu.be/YA2s5DcC9-Y?si=8fGkPiPyjYovsZlt)
 - [영상 편집 공부2](https://youtu.be/nnFdtKA8acM?si=0FRxltdq7a3kgS3z)
 - [영상에 사용하려는 bgm](https://www.youtube.com/watch?v=YyknBTm_YyM)
+
+## 장기훈
+### 2024.08.15
+* [보스 스킬 이펙트 ]
+* -장판 이펙트 (메테리얼)[effects smoke.zip](https://github.com/user-attachments/files/16631850/effects.smoke.zip)
+* -투사체 이펙트[effects1.zip](https://github.com/user-attachments/files/16631843/effects1.zip)
+* -레이저 이펙트및 몇몇 이펙트 [effects2.zip](https://github.com/user-attachments/files/16631845/effects2.zip)
+### 2024.08.16
+*[보스 스킬 이펙트]
+
 
 ---
 # 팀원
