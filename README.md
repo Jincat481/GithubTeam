@@ -264,6 +264,8 @@
 ### 2024.08.16
 *[보스 스킬 이펙트]
 *-레이저 이펙트 수정본[razer effects.zip](https://github.com/user-attachments/files/16631966/razer.effects.zip)
+*-레이저 이펙트 재재 수정본[razer effects.zip](https://github.com/user-attachments/files/16632001/razer.effects.zip)
+
 
 ---
 # 팀원
