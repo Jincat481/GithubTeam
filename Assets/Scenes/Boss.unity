@@ -4370,6 +4370,18 @@ PrefabInstance:
       propertyPath: soundManger
       value: 
       objectReference: {fileID: 1687208719}
+    - target: {fileID: 8282534076237233510, guid: db595dd24f2eb6b41a6abbdfab2026ef, type: 3}
+      propertyPath: skill3Data.Duration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282534076237233510, guid: db595dd24f2eb6b41a6abbdfab2026ef, type: 3}
+      propertyPath: skill3Data.ObjectSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282534076237233510, guid: db595dd24f2eb6b41a6abbdfab2026ef, type: 3}
+      propertyPath: skill3Data.IterationCount
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
