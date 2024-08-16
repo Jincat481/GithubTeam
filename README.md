@@ -243,6 +243,12 @@
 
 
 ---
+
+## 2024/08/16
+![캡처](https://github.com/user-attachments/assets/c018b6ba-bb69-44e0-9ff6-9e95069c3b48)
+![캡처2](https://github.com/user-attachments/assets/0d9ebb86-a627-451d-9c8e-c93c06b14263)
+
+---
 # 기획
 
 ## 홍석윤-PC담당
