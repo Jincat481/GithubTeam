@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class PlayerCollisionCheck : MonoBehaviour
 {
-    private Skill1Projectile skill1Projectile;
+    public float Damage;
 
     // Start is called before the first frame update
     void Start()
     {
-        skill1Projectile = GetComponent<Skill1Projectile>();
-        if (skill1Projectile == null)
-        {
-            Debug.LogError("skill1Projectile 컴포넌트를 찾을 수 없습니다.");
-        }
+        
     }
 
     // Update is called once per frame
@@ -25,8 +21,8 @@ public class PlayerCollisionCheck : MonoBehaviour
     {
         if (o.gameObject.CompareTag("Player"))
         {
-            skill1Projectile.Player.GetComponent<PlayerController>().TakeDamage(skill1Projectile.Damage);
-            ObjectPoolManger.ReturnObjectToPool(gameObject);
+            o.GetComponent<PlayerController>().TakeDamage(Damage);
+            ObjectPoolManger.ReturnObjectToPool(gameObject, ObjectPoolManger.PoolType.GameObject);
         }
     }
 }
