@@ -176,6 +176,9 @@
 ![배경-1sss](https://github.com/user-attachments/assets/01105d8a-0e44-4e3b-9a1f-a2df45890d3d)
 ![배경-1ss](https://github.com/user-attachments/assets/c859690c-8cc3-498f-8b3e-ad7f8d7e75df)
 ![배경](https://github.com/user-attachments/assets/46f6ad95-a26c-4380-95a2-bd068c51d466)
+## 2024/08/16
+![배경-1-1](https://github.com/user-attachments/assets/f24ec945-cf81-4e74-8080-65d52e367121)
+![배경-1-2](https://github.com/user-attachments/assets/527863c5-fdce-48fd-a07c-fe1c5eef8208)
 
 ----------------------------------------------------------------
 
@@ -217,7 +220,8 @@
 # ppt용 시놉시스 컷
 ## 2024/08/15
 ![시놈시스 컷](https://github.com/user-attachments/assets/8781f2c3-a604-4ee1-9ca0-38bb85d6341d)
-
+## 2024/08/16
+![시놉시스컷-2](https://github.com/user-attachments/assets/1e7130e1-d5cd-4f0d-8c02-0dff8666d9e7)
 
 
 ---
