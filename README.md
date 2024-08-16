@@ -255,6 +255,13 @@
 - [영상 편집 공부2](https://youtu.be/nnFdtKA8acM?si=0FRxltdq7a3kgS3z)
 - [영상에 사용하려는 bgm](https://www.youtube.com/watch?v=YyknBTm_YyM)
 
+## 장기훈
+### 2024.08.15
+* [보스 스킬 이펙트 ]
+* -장판 이펙트 (메테리얼)[effects smoke.zip](https://github.com/user-attachments/files/16631850/effects.smoke.zip)
+* -투사체 이펙트[effects1.zip](https://github.com/user-attachments/files/16631843/effects1.zip)
+* -레이저 이펙트및 몇몇 이펙트 [effects2.zip](https://github.com/user-attachments/files/16631845/effects2.zip)
+
 ---
 # 팀원
 기획 :
