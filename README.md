@@ -4,7 +4,7 @@
 
 추가로 패키지 매니저에서 com.unity.render-pipelines.core 검색하셔서 다운 받으세요.
 
-[스파인 다운로드](https://ko.esotericsoftware.com/spine-unity-download/)
+[유니티 스파인 확장프로그램 다운로드](https://ko.esotericsoftware.com/spine-unity-download/)
 
 다들 계획에 차질없게 진행하시길 바랍니다.
 
@@ -97,6 +97,9 @@
 * 보스 프리팹 추가 및 스킬 2번 몬스터 스포너 추가
 * 스킬 3번 방사형 투사체에 추가 발사 횟수 및 발사 간격 추가
 ---
+## 2024/08/19
+* 보스 그림자 추가
+---
 # 몬스터 스포너 구현 사항
 ## 2024/08/02 현재 프로토타입 버전
   * 인스펙터 창에서 설정할 수 있는 것들
@@ -150,6 +153,12 @@
 * 근거리 몬스터
 
   사망 애니메이션 교체 및 스프라이트 교체
+---
+## 2024/08/19
+* 근거리 몬스터
+
+  피격 색, 죽을 때 색 변경
+---
 # 플레이어 구현 사항
 ## 2024/08/02 현재 프로토타입 버전
   * 공격 관련 버그로 인해 처음부터 다시 구현하는 중
@@ -274,8 +283,11 @@
 ## 고아라
 ### 2024.08.15
 * 발표회용 ppt + 사용한 폰트 포함 [ppt발표용자료.zip](https://github.com/user-attachments/files/16624472/ppt.zip)
-
 * 유니티 공부
+### 2024.08.16
+*[패턴 수치 조정][스킬 수치 조정.docx](https://github.com/user-attachments/files/16636393/default.docx)
+
+
 
 ## 김혜진
 ### 2024.08.15
@@ -291,8 +303,10 @@
 * -투사체 이펙트[effects1.zip](https://github.com/user-attachments/files/16631843/effects1.zip)
 * -레이저 이펙트및 몇몇 이펙트 [effects2.zip](https://github.com/user-attachments/files/16631845/effects2.zip)
 ### 2024.08.16
-*[보스 스킬 이펙트]
-
+*[pc대쉬이펙트]
+-[dash effects.zip](https://github.com/user-attachments/files/16636352/dash.effects.zip)
+[보스 패턴및 수치 조절]
+[보스 패턴 수치.zip](https://github.com/user-attachments/files/16636353/default.zip)
 
 ---
 # 팀원
