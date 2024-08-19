@@ -2255,6 +2255,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1064482469 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6159832143634910522, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+  m_PrefabInstance: {fileID: 45988606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1131768260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3047,7 +3052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe1c22d4ed51284db73b5b5c9cfed84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1064482469}
   speed: 3
   center: {x: 0.03, y: 0}
   size: {x: 40, y: 28.3}
