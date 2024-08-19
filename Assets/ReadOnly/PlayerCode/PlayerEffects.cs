@@ -30,7 +30,7 @@ public class PlayerEffects : MonoBehaviour
         if (leftDashEffect != null)
         {
             GameObject effect = Instantiate(leftDashEffect, transform.position, Quaternion.identity);
-            DestroyEffect(effect, 2f); 
+            DestroyEffect(effect, 2f);
         }
     }
 
@@ -40,7 +40,7 @@ public class PlayerEffects : MonoBehaviour
         if (rightDashEffect != null)
         {
             GameObject effect = Instantiate(rightDashEffect, transform.position, Quaternion.identity);
-            DestroyEffect(effect, 2f); 
+            DestroyEffect(effect, 2f);
         }
     }
 
@@ -50,7 +50,7 @@ public class PlayerEffects : MonoBehaviour
         if (damageEffect != null)
         {
             GameObject effect = Instantiate(damageEffect, transform.position, Quaternion.identity);
-            DestroyEffect(effect, 2f); 
+            DestroyEffect(effect, 2f);
         }
     }
 
@@ -60,7 +60,7 @@ public class PlayerEffects : MonoBehaviour
         if (deathEffect != null)
         {
             GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            DestroyEffect(effect, 2f); 
+            DestroyEffect(effect, 2f);
         }
     }
 

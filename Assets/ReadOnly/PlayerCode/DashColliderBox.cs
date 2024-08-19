@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 
 public class DashColliderBox : MonoBehaviour
 {
@@ -12,8 +12,8 @@ public class DashColliderBox : MonoBehaviour
     void Start()
     {
         controller = GetComponentInParent<PlayerController>();
-        dashCollider = GetComponent<Collider2D>(); 
-        dashCollider.enabled = false; 
+        dashCollider = GetComponent<Collider2D>();
+        dashCollider.enabled = false;
         playerEffects = GetComponentInParent<PlayerEffects>(); // PlayerEffects 컴포넌트 가져오기
     }
 
@@ -22,7 +22,7 @@ public class DashColliderBox : MonoBehaviour
         // 대쉬 상태일 때만 콜라이더 활성화
         dashCollider.enabled = controller.isDashing;
 
-        
+
         if (!controller.isDashing)
         {
             effectPlayed = false;
@@ -37,12 +37,12 @@ public class DashColliderBox : MonoBehaviour
         {
             if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
             {
-                ApplyDashDamage(other); 
+                ApplyDashDamage(other);
 
                 // 보스가 아닌 경우에만 대쉬 쿨타임 초기화
                 if (!other.CompareTag("Boss"))
                 {
-                    controller.currentdashcooldown = 0; 
+                    controller.currentdashcooldown = 0;
                 }
 
                 // 대쉬 이펙트 재생 (이펙트가 한 번만 재생되도록 확인)
@@ -65,7 +65,7 @@ public class DashColliderBox : MonoBehaviour
                     SoundManager.Instance.Play("Dash");
                 }
 
-                
+
                 hitObjects.Add(other);
             }
         }
@@ -76,19 +76,19 @@ public class DashColliderBox : MonoBehaviour
         EnemyMove enemyMove = collider.GetComponent<EnemyMove>();
         if (enemyMove != null)
         {
-            enemyMove.TakeDamage(controller.dashDamage); 
+            enemyMove.TakeDamage(controller.dashDamage);
         }
 
         BossHP boss = collider.GetComponent<BossHP>();
         if (boss != null)
         {
-            boss.TakeDamage(controller.dashDamage); 
+            boss.TakeDamage(controller.dashDamage);
         }
 
         RangedMonster rangedMonster = collider.GetComponent<RangedMonster>();
         if (rangedMonster != null)
         {
-            rangedMonster.TakeDamage(controller.dashDamage); 
+            rangedMonster.TakeDamage(controller.dashDamage);
         }
     }
 }
