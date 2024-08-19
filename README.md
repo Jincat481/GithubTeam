@@ -4,7 +4,7 @@
 
 추가로 패키지 매니저에서 com.unity.render-pipelines.core 검색하셔서 다운 받으세요.
 
-[스파인 다운로드](https://ko.esotericsoftware.com/spine-unity-download/)
+[유니티 스파인 확장프로그램 다운로드](https://ko.esotericsoftware.com/spine-unity-download/)
 
 다들 계획에 차질없게 진행하시길 바랍니다.
 
