@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5981387681626873204}
   - component: {fileID: 7187582797867959441}
   - component: {fileID: 6413172647496286880}
-  - component: {fileID: 5303566796116104727}
   - component: {fileID: 5273669929436905295}
   m_Layer: 13
   m_Name: MeleeMonsterParent
@@ -96,9 +95,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   Potion: {fileID: 2024875715454788301, guid: 6890768d5ba9b6a47a2adb85ad522e21, type: 3}
-  CollisionDamage: 5
   moveSpeed: 3
   spawnDelay: 5
+  ChildCollider: {fileID: 1671913564354580676}
 --- !u!70 &6413172647496286880
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,41 +132,6 @@ CapsuleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.061600335, y: -0.005028003}
   m_Size: {x: 1.9681106, y: 1.0721358}
-  m_Direction: 1
---- !u!70 &5303566796116104727
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2815893238064637100}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.061600454, y: -0.012619847}
-  m_Size: {x: 2.1807127, y: 1.2088076}
   m_Direction: 1
 --- !u!50 &5273669929436905295
 Rigidbody2D:
@@ -290,6 +254,8 @@ GameObject:
   m_Component:
   - component: {fileID: 930428236541441291}
   - component: {fileID: 7976910738893995192}
+  - component: {fileID: 7697935327822265791}
+  - component: {fileID: 1671913564354580676}
   m_Layer: 0
   m_Name: MeleeMonster
   m_TagString: Untagged
@@ -364,3 +330,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7697935327822265791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656249429472311427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec93e9ad1821be849a5a63dbd454099e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionDamage: 5
+--- !u!70 &1671913564354580676
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656249429472311427}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.061600454, y: -0.012619847}
+  m_Size: {x: 2.1807127, y: 1.2088076}
+  m_Direction: 1
