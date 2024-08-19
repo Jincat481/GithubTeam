@@ -9,7 +9,7 @@ public class EnemyMove : MonoBehaviour
     // 포션 오브젝트
     [SerializeField]
     private GameObject Potion;
-    [SerializeField]private float CollisionDamage;
+
     private GameObject Player;
     private Animator anim;
     public float moveSpeed;
@@ -18,7 +18,7 @@ public class EnemyMove : MonoBehaviour
     Rigidbody2D rigid;
     NavMeshAgent agent;
     Collider2D cl;
-    PlayerController playerScript;
+    public CapsuleCollider2D ChildCollider;
 
     // 사운드 매니저
     private GameObject soundManger;
@@ -28,7 +28,6 @@ public class EnemyMove : MonoBehaviour
     public void Start()
     {
         Player = GameObject.FindWithTag("Player");
-        playerScript = Player.GetComponent<PlayerController>();
         StartCoroutine(StartDelay());
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -93,6 +92,7 @@ public class EnemyMove : MonoBehaviour
 
             cl.enabled = false;
             agent.enabled = false;
+            ChildCollider.enabled = false;
             anim.SetTrigger("IsDie");
         }
     }
@@ -130,13 +130,6 @@ public class EnemyMove : MonoBehaviour
         spawnDelay = 0;
         anim.SetBool("IsIdle", false);
         anim.SetBool("IsWalk", true);
-    }
-
-    private void OnTriggerEnter2D(Collider2D o) {
-        if(o.gameObject.CompareTag("Player") && !playerScript.isDashing){
-            playerScript.TakeDamage(CollisionDamage);
-            agent.ResetPath();
-        }
     }
 }
 

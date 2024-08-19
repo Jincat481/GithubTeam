@@ -240,6 +240,8 @@ MonoBehaviour:
     ObjectSpeed: 10
     angleToAdd: 30
     ObjectCount: 12
+    IterationCount: 0
+    Duration: 0
   skill4Data:
     state: 4
     SkillPrefab: {fileID: 0}
@@ -455,8 +457,8 @@ MonoBehaviour:
   spawn: 0
   maximumRangedMonstercount: 0
   monsterType:
-    meleeMonster: {fileID: 1020091705983700, guid: 969641ab9ead7b448824084245d9c275, type: 3}
-    rangedMonster: {fileID: 1020091705983700, guid: 969641ab9ead7b448824084245d9c275, type: 3}
+    meleeMonster: {fileID: 2815893238064637100, guid: e7b3d5ebf08b46b4ea40dd075bc419eb, type: 3}
+    rangedMonster: {fileID: 2815893238064637100, guid: e7b3d5ebf08b46b4ea40dd075bc419eb, type: 3}
   spawnerDatas:
   - spawnPoint: {fileID: 5740367555545392873}
   - spawnPoint: {fileID: 16002313354290756}
