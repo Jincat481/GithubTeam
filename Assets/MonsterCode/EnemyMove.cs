@@ -23,11 +23,7 @@ public class EnemyMove : MonoBehaviour
     // 사운드 매니저
     private GameObject soundManger;
     private MsoundManger soundMangerScript;
-    // 피격 시 컬러
-    private SpriteRenderer spriteRenderer;
-    public Color originalColor; // 원래 색상 저장
-    public Color hitColor = Color.red; // 피격 시 변경될 색상
-    public float colorChangeDuration = 0.5f; // 색상이 변경된 상태로 유지되는 시간
+
     bool ishurt = false;
     public void Start()
     {
@@ -40,9 +36,6 @@ public class EnemyMove : MonoBehaviour
         soundManger = GameObject.FindWithTag("MsoundManger");
         soundMangerScript = soundManger.GetComponent<MsoundManger>();
         cl = GetComponent<Collider2D>();
-        // 원래 색상 저장
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        originalColor = spriteRenderer.color;
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -81,11 +74,11 @@ public class EnemyMove : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+
         anim.SetBool("IsWalk", false);
         rigid.velocity = Vector3.zero;
         if (health > 0f)
         {
-            StartCoroutine(ChangeColorTemporarily(hitColor));
             agent.ResetPath();
             soundManger.GetComponent<AudioSource>().PlayOneShot(soundMangerScript.EnemyHurtAudio, soundMangerScript.EnemyHurtVolumeScale);
             anim.SetTrigger("IsHurt");
@@ -97,7 +90,6 @@ public class EnemyMove : MonoBehaviour
             //audioSource.Stop();
             //audioSource.PlayOneShot(selectedClip, playOneShot.dieVolumeScale);
 
-            StartCoroutine(ChangeColorTemporarily(Color.gray));
             cl.enabled = false;
             agent.enabled = false;
             ChildCollider.enabled = false;
@@ -138,18 +130,6 @@ public class EnemyMove : MonoBehaviour
         spawnDelay = 0;
         anim.SetBool("IsIdle", false);
         anim.SetBool("IsWalk", true);
-    }
-
-    private IEnumerator ChangeColorTemporarily(Color newColor)
-    {
-        // 피격 시 색상 변경
-        SpriteColorManger.ChangeColor(spriteRenderer, newColor);
-
-        // 일정 시간 대기
-        yield return new WaitForSeconds(colorChangeDuration);
-
-        // 원래 색상으로 변경
-        SpriteColorManger.ChangeColor(spriteRenderer, newColor);
     }
 }
 
