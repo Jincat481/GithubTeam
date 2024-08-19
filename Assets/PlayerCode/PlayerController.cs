@@ -82,8 +82,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) moveVertical = -1; // 아래쪽 이동
         if (Input.GetKey(KeyCode.A)) moveHorizontal = -1; // 왼쪽 이동
         if (Input.GetKey(KeyCode.D)) moveHorizontal = 1; // 오른쪽 이동
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
+        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        moveVertical = Input.GetAxisRaw("Vertical");
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical).normalized * moveSpeed;
         MyRigidbody2D.velocity = new Vector2(movement.x, movement.y);
