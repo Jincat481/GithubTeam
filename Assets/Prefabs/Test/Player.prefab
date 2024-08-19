@@ -51,6 +51,9 @@ GameObject:
   - component: {fileID: 2816473738904486655}
   - component: {fileID: 9051201995889388375}
   - component: {fileID: 511472581385818045}
+  - component: {fileID: 8193671176472844690}
+  - component: {fileID: 365031201628551933}
+  - component: {fileID: 3515756913276992262}
   m_Layer: 31
   m_Name: Player
   m_TagString: Player
@@ -201,8 +204,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0000021489632, y: -1.5197686}
-  m_Size: {x: 6.602871, y: 15.461034}
+  m_Offset: {x: 0.24763833, y: -0.34347716}
+  m_Size: {x: 11.308076, y: 31.186325}
   m_Direction: 0
 --- !u!95 &9051201995889388375
 Animator:
@@ -233,6 +236,67 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240423436863517495}
   m_Enabled: 1
+--- !u!114 &8193671176472844690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240423436863517495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449686fe93066fe4fa82789d3a06ec1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  dashSpeed: 20
+  dashTime: 1
+  dashCooldown: 4
+  currentdashcooldown: 0
+  dashDamage: 3
+  dashDistance: 3
+  isDashing: 0
+  dashDirection: {x: 0, y: 0}
+  maxHp: 100
+  curHp: 100
+  playerEffects: {fileID: 0}
+  playerAttack: {fileID: 0}
+--- !u!114 &365031201628551933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240423436863517495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed4099267d52f04ba8c43f160db01d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 9051201995889388375}
+  meleeSpeed: 0.5
+  damage: 1
+  attackCollider: {fileID: 8853074599835122114}
+  playerController: {fileID: 8193671176472844690}
+  playerEffects: {fileID: 3515756913276992262}
+  soundManager: {fileID: 3567770288520829647, guid: 09379c1a883b742408b489d2b49dd763, type: 3}
+--- !u!114 &3515756913276992262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240423436863517495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39d3139c9b3fc242bd9a5c793aa4571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackEffect: {fileID: 0}
+  leftDashEffect: {fileID: 0}
+  rightDashEffect: {fileID: 0}
+  damageEffect: {fileID: 0}
+  deathEffect: {fileID: 0}
 --- !u!1 &1442911173935530527
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +712,6 @@ GameObject:
   - component: {fileID: 6402774471794354505}
   - component: {fileID: 7094398965529837308}
   - component: {fileID: 8853074599835122114}
-  - component: {fileID: 3977172817710364677}
   m_Layer: 31
   m_Name: GFX
   m_TagString: Untagged
@@ -753,31 +816,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000059604645, y: 0}
+  m_Offset: {x: 9.603268, y: -0.7452918}
   serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &3977172817710364677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6019107535184151787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed4099267d52f04ba8c43f160db01d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 9051201995889388375}
-  meleeSpeed: 0.5
-  damage: 1
-  attackCollider: {fileID: 8853074599835122114}
-  playerController: {fileID: 0}
-  playerEffects: {fileID: 0}
-  soundManager: {fileID: 0}
+  m_Radius: 38.963387
 --- !u!1 &7527409756344495477
 GameObject:
   m_ObjectHideFlags: 0
