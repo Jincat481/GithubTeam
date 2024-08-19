@@ -227,7 +227,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.3803985, g: 0.9254902, b: 0.039215688, a: 1}
+      maxColor: {r: 0.37501767, g: 0.8207547, b: 0.096787095, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4787,7 +4787,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38e07257f92b67c499735d860a3abe10, type: 2}
+  - {fileID: 2100000, guid: 7793d7de8c082924996004504604b4a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4852,6 +4852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1053db730031e464181139e7c225638d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 0
 --- !u!114 &8646890260256278828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5114,7 +5115,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.9339623, b: 0.17573696, a: 1}
+      maxColor: {r: 0, g: 1, b: 0.23994875, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6370,8 +6371,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 7
-    tilesY: 1
+    tilesX: 8
+    tilesY: 8
     animationType: 0
     rowIndex: 0
     cycles: 1
@@ -9668,7 +9669,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7eff4e93320db9e4daeb0bee63a82f04, type: 2}
+  - {fileID: 2100000, guid: 3147766ee4c76cc4890b8b859d36b6a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
