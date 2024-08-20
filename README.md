@@ -192,6 +192,9 @@
 ## 2024/08/16
 ![배경-1-1](https://github.com/user-attachments/assets/f24ec945-cf81-4e74-8080-65d52e367121)
 ![배경-1-2](https://github.com/user-attachments/assets/527863c5-fdce-48fd-a07c-fe1c5eef8208)
+## ~2024/08/19
+![배경-1흙바닥(5)](https://github.com/user-attachments/assets/85dbe2f6-2633-4047-90f1-e30e81fa163f)
+![배경-2 발표회용-1](https://github.com/user-attachments/assets/9420532e-6eeb-48d9-a7b5-b8a6da70561e)
 
 ----------------------------------------------------------------
 

@@ -85,7 +85,7 @@ public class EnemyMove : MonoBehaviour
         rigid.velocity = Vector3.zero;
         if (health > 0f)
         {
-            StartCoroutine(ChangeColorTemporarily(hitColor));
+            StartCoroutine(ChangeColorTemporarily(hitColor, originalColor));
             agent.ResetPath();
             soundManger.GetComponent<AudioSource>().PlayOneShot(soundMangerScript.EnemyHurtAudio, soundMangerScript.EnemyHurtVolumeScale);
             anim.SetTrigger("IsHurt");
@@ -97,11 +97,12 @@ public class EnemyMove : MonoBehaviour
             //audioSource.Stop();
             //audioSource.PlayOneShot(selectedClip, playOneShot.dieVolumeScale);
 
-            StartCoroutine(ChangeColorTemporarily(Color.gray));
             cl.enabled = false;
             agent.enabled = false;
             ChildCollider.enabled = false;
             anim.SetTrigger("IsDie");
+            // 죽으면 색상 변경
+            SpriteColorManger.ChangeColor(spriteRenderer, Color.grey);
         }
     }
 
@@ -140,7 +141,7 @@ public class EnemyMove : MonoBehaviour
         anim.SetBool("IsWalk", true);
     }
 
-    private IEnumerator ChangeColorTemporarily(Color newColor)
+    private IEnumerator ChangeColorTemporarily(Color newColor, Color originalColor)
     {
         // 피격 시 색상 변경
         SpriteColorManger.ChangeColor(spriteRenderer, newColor);
@@ -149,7 +150,7 @@ public class EnemyMove : MonoBehaviour
         yield return new WaitForSeconds(colorChangeDuration);
 
         // 원래 색상으로 변경
-        SpriteColorManger.ChangeColor(spriteRenderer, newColor);
+        SpriteColorManger.ChangeColor(spriteRenderer, originalColor);
     }
 }
 
