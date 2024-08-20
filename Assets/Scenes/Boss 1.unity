@@ -1140,6 +1140,7 @@ MonoBehaviour:
   speed: 3
   center: {x: 0.06, y: 0}
   size: {x: 107.1, y: 60.1}
+  gridSpacing: 1
 --- !u!114 &440774534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9563,6 +9564,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6159832143634910522, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
   m_PrefabInstance: {fileID: 1312042367310572030}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1450832347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8281638017452461979, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+  m_PrefabInstance: {fileID: 1312042367310572030}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1223ff1c621244a8989ac416a4e87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1517325713
 GameObject:
   m_ObjectHideFlags: 0
@@ -10476,7 +10488,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 478625984016131448, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301803982097551314, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301803982097551314, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391508213435754433, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120789567645851054, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1450832347}
     - target: {fileID: 5619230320741091206, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623386267913089320, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
