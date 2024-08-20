@@ -86,8 +86,25 @@ public class PlayerController : MonoBehaviour
         // 이동 애니메이션 처리
         if (!isDashing)
         {
-            MyAnimator.SetFloat("MoveX", moveHorizontal);
-            MyAnimator.SetFloat("MoveY", moveVertical);
+            bool isChange = false; // IsChange 플래그 초기화
+
+            // MoveX 값이 변경되었는지 확인하고, 변경되었으면 IsChange 플래그 설정
+            if (MyAnimator.GetFloat("MoveX") != moveHorizontal)
+            {
+                MyAnimator.SetFloat("MoveX", moveHorizontal);
+                isChange = true;
+            }
+
+            // MoveY 값이 변경되었는지 확인하고, 변경되었으면 IsChange 플래그 설정
+            if (MyAnimator.GetFloat("MoveY") != moveVertical)
+            {
+                MyAnimator.SetFloat("MoveY", moveVertical);
+                isChange = true;
+            }
+
+            // IsChange 값 업데이트
+            MyAnimator.SetBool("IsChange", isChange);
+
             MyAnimator.SetBool("IsMoving", movement.sqrMagnitude > 0);
         }
     }
@@ -209,14 +226,14 @@ public class PlayerController : MonoBehaviour
     private IEnumerator PerformAttack()
     {
         MyAnimator.SetBool("IsAttacking", true); // 공격 상태 활성화
-        playerAttack.PerformAttack(); // 공격 실행
+        playerAttack.PerformAttack(); // 공격 실행  
         MyAnimator.SetTrigger("Attack"); // 공격 애니메이션 트리거
 
         yield return new WaitForSeconds(0.3f); // 공격 애니메이션 시간 (적절히 조정 필요)
 
         MyAnimator.SetBool("IsAttacking", false); // 공격 상태 해제
+
+        // 공격 후 이동 상태 및 애니메이션 재확인
+        HandleMovement();
     }
-
-
-
 }
