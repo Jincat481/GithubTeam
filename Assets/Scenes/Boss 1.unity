@@ -1223,8 +1223,8 @@ MonoBehaviour:
   target: {fileID: 1450832343}
   speed: 3
   center: {x: 0.06, y: 0}
-  size: {x: 107.1, y: 60.1}
-  gridSpacing: 1
+  size: {x: 34.7, y: 20.3}
+  gridSpacing: 5
 --- !u!114 &440774534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10929,6 +10929,14 @@ PrefabInstance:
     - target: {fileID: 6159832143634910522, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281638017452461979, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: dashDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281638017452461979, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
+      propertyPath: playerAttack
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9194462866633664484, guid: dd98b8b0eee66ad4eb90f6d89901cd1e, type: 3}
       propertyPath: soundManager
