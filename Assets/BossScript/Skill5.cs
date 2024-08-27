@@ -59,8 +59,9 @@ public class Skill5 : MonoBehaviour
 
     IEnumerator EnableSkill5_1()
     {
+        renderer.enabled = false;
         cl.enabled = true;
-        Skill5AreaRenderer.enabled = true;
+        // Skill5AreaRenderer.enabled = true;
         particle.Play();
         yield return new WaitForSeconds(SkillretentionTime);
         particle.Stop();

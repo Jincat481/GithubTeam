@@ -12,11 +12,11 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        // 싱글톤 패턴 구현
+        
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 시에도 사운드 매니저 유지
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
