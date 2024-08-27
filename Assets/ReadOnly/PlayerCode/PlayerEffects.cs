@@ -14,7 +14,7 @@ public class PlayerEffects : MonoBehaviour
 
     }
 
-    // 공격 시 호출되는 메서드
+    // 공격 이펙트
     public void PlayAttackEffect()
     {
         if (attackEffect != null)
@@ -24,7 +24,7 @@ public class PlayerEffects : MonoBehaviour
         }
     }
 
-    // 왼쪽 대쉬 시 호출되는 메서드
+    // 왼쪽 대쉬 이펙트
     public void PlayLeftDashEffect()
     {
         if (leftDashEffect != null)
@@ -34,7 +34,7 @@ public class PlayerEffects : MonoBehaviour
         }
     }
 
-    // 오른쪽 대쉬 시 호출되는 메서드
+    // 오른쪽 데쉬 이펙트
     public void PlayRightDashEffect()
     {
         if (rightDashEffect != null)
@@ -44,7 +44,7 @@ public class PlayerEffects : MonoBehaviour
         }
     }
 
-    // 피해를 입었을 때 호출되는 메서드
+    // 피격시 이펙트
     public void PlayDamageEffect()
     {
         if (damageEffect != null)
@@ -54,7 +54,7 @@ public class PlayerEffects : MonoBehaviour
         }
     }
 
-    // 사망 시 호출되는 메서드
+    // 사망 이펙트
     public void PlayDeathEffect()
     {
         if (deathEffect != null)
@@ -64,7 +64,7 @@ public class PlayerEffects : MonoBehaviour
         }
     }
 
-    // 이펙트를 일정 시간 후에 삭제하는 메서드
+    
     private void DestroyEffect(GameObject effect, float delay)
     {
         Destroy(effect, delay);

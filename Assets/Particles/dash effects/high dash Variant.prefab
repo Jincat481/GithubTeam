@@ -74,7 +74,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.angle
+      value: NaN
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 1.0000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: -4.206935
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 4.021119e-12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.m_Position.z
+      value: -0.00000004291533
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: 318.95105
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.m_Rotation.y
+      value: 23.305958
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
+      propertyPath: ShapeModule.m_Rotation.z
+      value: 232.36847
       objectReference: {fileID: 0}
     - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -195,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3630192060672997485, guid: 5457c36b6398ede4a8009f19f3fc4cb8, type: 3}
       propertyPath: InitialModule.startSize.scalar

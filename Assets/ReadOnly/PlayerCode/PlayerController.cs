@@ -26,21 +26,21 @@ public class PlayerController : MonoBehaviour
     private Animator MyAnimator;
     private SpriteRenderer MySpriteRenderer; // 스프라이트 렌더러
 
-    // 이펙트 및 사운드 관련 변수
+    
     public PlayerEffects playerEffects; // 플레이어 이펙트 스크립트
     public PlayerAttack playerAttack; // 플레이어 어택 스크립트
 
     private void Start()
     {
-        // 초기 체력 설정
+        
         curHp = maxHp;
 
-        // 컴포넌트 초기화
+        
         MyRigidbody2D = GetComponent<Rigidbody2D>();
         MyAnimator = GetComponent<Animator>();
         MySpriteRenderer = GetComponent<SpriteRenderer>();
 
-        // 이펙트 및 공격 스크립트 설정
+        
         if (playerEffects == null)
         {
             playerEffects = GetComponent<PlayerEffects>();
@@ -60,10 +60,10 @@ public class PlayerController : MonoBehaviour
             HandleMovement();
         }
 
-        // 대쉬 처리
+       
         HandleDash();
 
-        // 쿨타임 감소
+        
         if (currentdashcooldown > 0)
         {
             currentdashcooldown -= Time.deltaTime;
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
     // 이동 처리 함수
     private void HandleMovement()
     {
-        // 공격 중일 때는 이동 애니메이션을 멈춤
+        
         if (MyAnimator.GetBool("IsAttacking"))
             return;
 
@@ -86,23 +86,23 @@ public class PlayerController : MonoBehaviour
         // 이동 애니메이션 처리
         if (!isDashing)
         {
-            bool isChange = false; // IsChange 플래그 초기화
+            bool isChange = false; 
 
-            // MoveX 값이 변경되었는지 확인하고, 변경되었으면 IsChange 플래그 설정
+            
             if (MyAnimator.GetFloat("MoveX") != moveHorizontal)
             {
                 MyAnimator.SetFloat("MoveX", moveHorizontal);
                 isChange = true;
             }
 
-            // MoveY 값이 변경되었는지 확인하고, 변경되었으면 IsChange 플래그 설정
+            
             if (MyAnimator.GetFloat("MoveY") != moveVertical)
             {
                 MyAnimator.SetFloat("MoveY", moveVertical);
                 isChange = true;
             }
 
-            // IsChange 값 업데이트
+           
             MyAnimator.SetBool("IsChange", isChange);
 
             MyAnimator.SetBool("IsMoving", movement.sqrMagnitude > 0);
@@ -123,10 +123,10 @@ public class PlayerController : MonoBehaviour
 
             StartCoroutine(InvincibilityCoroutine());
 
-            // 데미지 사운드 재생
+           
             SoundManager.Instance.Play("Damage");
 
-            // 데미지 이펙트 재생
+            
             if (playerEffects != null)
             {
                 playerEffects.PlayDamageEffect();
@@ -160,7 +160,6 @@ public class PlayerController : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         dashDirection = (mousePosition - (Vector2)transform.position).normalized;
 
-        // 대쉬 방향에 따른 애니메이션 설정
         if (dashDirection.x > 0)
         {
             MyAnimator.SetBool("IsRightDashing", true);
@@ -170,17 +169,14 @@ public class PlayerController : MonoBehaviour
             MyAnimator.SetBool("IsLeftDashing", true);
         }
 
-        // 대쉬 중에는 이동 애니메이션을 멈춤
         MyAnimator.SetBool("IsMoving", false);
 
         currentdashcooldown = dashCooldown;
         float elapsedTime = 0;
         float dashDistanceTraveled = 0;
 
-        // 대쉬 사운드 재생
         SoundManager.Instance.Play("Dash");
 
-        // 대쉬 이펙트 재생
         if (playerEffects != null)
         {
             if (dashDirection.x > 0)
@@ -193,29 +189,32 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();  
+
         while (elapsedTime < dashTime && dashDistanceTraveled < dashDistance)
         {
             float distanceThisFrame = dashSpeed * Time.deltaTime;
-            transform.Translate(dashDirection * distanceThisFrame);
+            Vector2 newPosition = rb.position + dashDirection * distanceThisFrame;  
+            rb.MovePosition(newPosition);  
+
             elapsedTime += Time.deltaTime;
             dashDistanceTraveled += distanceThisFrame;
 
             yield return null;
         }
 
-        isDashing = false; // 대쉬 상태 해제
+        isDashing = false;
 
-        // 대쉬 애니메이션 종료
         MyAnimator.SetBool("IsRightDashing", false);
         MyAnimator.SetBool("IsLeftDashing", false);
 
-        // 대쉬 후 이동 상태 재확인하여 걷기 애니메이션 재활성화
         HandleMovement();
     }
 
+
     private void Update()
     {
-        // 공격 입력 처리
+        
         if (Input.GetMouseButtonDown(0) && playerAttack != null)
         {
             StartCoroutine(PerformAttack());
@@ -225,15 +224,15 @@ public class PlayerController : MonoBehaviour
     // 공격 애니메이션 및 행동 처리 코루틴
     private IEnumerator PerformAttack()
     {
-        MyAnimator.SetBool("IsAttacking", true); // 공격 상태 활성화
-        playerAttack.PerformAttack(); // 공격 실행  
-        MyAnimator.SetTrigger("Attack"); // 공격 애니메이션 트리거
+        MyAnimator.SetBool("IsAttacking", true);
+        playerAttack.PerformAttack(); 
+        MyAnimator.SetTrigger("Attack"); 
 
-        yield return new WaitForSeconds(0.3f); // 공격 애니메이션 시간 (적절히 조정 필요)
+        yield return new WaitForSeconds(0.3f); 
 
-        MyAnimator.SetBool("IsAttacking", false); // 공격 상태 해제
+        MyAnimator.SetBool("IsAttacking", false); 
 
-        // 공격 후 이동 상태 및 애니메이션 재확인
+        
         HandleMovement();
     }
 }

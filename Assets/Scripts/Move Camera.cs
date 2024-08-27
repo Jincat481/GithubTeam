@@ -36,13 +36,13 @@ public class CameraCtrl : MonoBehaviour
         float minY = center.y - size.y * 0.5f;
         float maxY = center.y + size.y * 0.5f;
 
-        // Draw vertical lines
+        
         for (float x = minX; x <= maxX; x += gridSpacing)
         {
             Gizmos.DrawLine(new Vector3(x, minY, 0), new Vector3(x, maxY, 0));
         }
 
-        // Draw horizontal lines
+        
         for (float y = minY; y <= maxY; y += gridSpacing)
         {
             Gizmos.DrawLine(new Vector3(minX, y, 0), new Vector3(maxX, y, 0));

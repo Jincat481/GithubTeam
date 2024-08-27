@@ -19,7 +19,7 @@ public class DashColliderBox : MonoBehaviour
 
     void Update()
     {
-        // 대쉬 상태일 때만 콜라이더 활성화
+       
         dashCollider.enabled = controller.isDashing;
 
 
@@ -39,22 +39,22 @@ public class DashColliderBox : MonoBehaviour
             {
                 ApplyDashDamage(other);
 
-                // 보스가 아닌 경우에만 대쉬 쿨타임 초기화
+                
                 if (!other.CompareTag("Boss"))
                 {
                     controller.currentdashcooldown = 0;
                 }
 
-                // 대쉬 이펙트 재생 (이펙트가 한 번만 재생되도록 확인)
+                // 대쉬 이펙트 재생 
                 if (!effectPlayed && playerEffects != null)
                 {
                     if (controller.dashDirection.x > 0)
                     {
-                        playerEffects.PlayRightDashEffect(); // 오른쪽 대쉬 이펙트
+                        playerEffects.PlayRightDashEffect(); 
                     }
                     else
                     {
-                        playerEffects.PlayLeftDashEffect(); // 왼쪽 대쉬 이펙트
+                        playerEffects.PlayLeftDashEffect(); 
                     }
                     effectPlayed = true;
                 }
